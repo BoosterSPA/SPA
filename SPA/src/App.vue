@@ -1,14 +1,10 @@
 <script setup>
-// import homePage from "@/pages/homePage.vue"
 </script>
 
 
 
 <template>
-  <!-- <navBarComponent/> -->
-  <main>
     <router-view />
-  </main>
 </template>
 
 <style scoped>
