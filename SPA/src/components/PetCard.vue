@@ -138,7 +138,7 @@ function closeModal() {
 						<p><strong>Âge:</strong> {{ selectedAnimal.age }}</p>
 						<p><strong>Santé générale:</strong> {{ selectedAnimal.situationMedicale }}</p>
 						<p><strong>Description:</strong> {{ selectedAnimal.description }}</p>
-						<button @click="closeModal"></button>
+						<button class="closeButton" @click.stop="closeModal">&times;</button>
 					</div>
 					<div class="modalImages">
 						<img :src="selectedAnimal.image" :alt="selectedAnimal.name" class="modalImage" />
@@ -200,7 +200,7 @@ button:active {
 .modal {
 	position: fixed;
 	top: 0;
-	left:0;
+	left: 0;
 	width: 100%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.5);
@@ -223,6 +223,18 @@ button:active {
 	gap: 40px;
 }
 
+.closeButton {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background: transparent;
+	border: none;
+	font-size: 36px;
+	color: #FF7D29;
+	cursor: pointer;
+	transition: color 0.3s;
+}
+
 .modalInfo {
 	flex: 1;
 	font-size: 24px;
@@ -242,12 +254,12 @@ button:active {
 	flex: 1;
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 20px;
 }
 
 .modalImage {
 	width: 100%;
-	height: 49%;
+	height: 50%;
 	object-fit: cover;
 	border-radius: 8px;
 }
@@ -264,14 +276,9 @@ button:active {
 		height: auto;
 	}
 
-	.modalImages {
-		width: 100%;
-		flex-direction: row;
-	}
-
 	.modalImage {
-		width: 49%;
-		height: 200px;
+		height: auto;
+		max-height: 300px;
 	}
 
 	.modalInfo {
@@ -298,8 +305,8 @@ button:active {
 	}
 
 	.modalImage {
-		width: 100%;
-		height: 150px;
+		max-height: 200px;
+
 	}
 }
 </style>
