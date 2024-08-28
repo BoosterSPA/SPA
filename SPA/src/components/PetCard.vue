@@ -6,6 +6,9 @@ const animals = ref([
 		id: 1,
 		name: 'Lacy',
 		age: '2 ans',
+		sexe: "Mâle",
+		activite: "Courir",
+		caractere: "sociable",
 		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
 		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
 		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
@@ -15,6 +18,9 @@ const animals = ref([
 		id: 2,
 		name: 'Daizy',
 		age: '3 ans',
+		sexe: "Mâle",
+		activite: "Courir",
+		caractere: "Sociable",
 		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
 		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
 		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
@@ -24,6 +30,9 @@ const animals = ref([
 		id: 1,
 		name: 'Lacy',
 		age: '2 ans',
+		sexe: "Mâle",
+		activite: "Courir",
+		caractere: "sociable",
 		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
 		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
 		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
@@ -33,6 +42,9 @@ const animals = ref([
 		id: 2,
 		name: 'Daizy',
 		age: '3 ans',
+		sexe: "Mâle",
+		activite: "Courir",
+		caractere: "sociable",
 		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
 		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
 		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
@@ -42,6 +54,9 @@ const animals = ref([
 		id: 1,
 		name: 'Lacy',
 		age: '2 ans',
+		sexe: "Mâle",
+		activite: "Courir",
+		caractere: "sociable",
 		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
 		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
 		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
@@ -51,6 +66,9 @@ const animals = ref([
 		id: 2,
 		name: 'Daizy',
 		age: '3 ans',
+		sexe: "Femelle",
+		activite: "Dormir",
+		caractere: "Affectueuse",
 		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
 		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
 		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
@@ -60,6 +78,9 @@ const animals = ref([
 		id: 1,
 		name: 'Lacy',
 		age: '2 ans',
+		sexe: "Femelle",
+		activite: "Dormir",
+		caractere: "Affectueuse",
 		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
 		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
 		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
@@ -69,6 +90,9 @@ const animals = ref([
 		id: 2,
 		name: 'Daizy',
 		age: '3 ans',
+		sexe: "Femelle",
+		Activite: "Dormir",
+		Caractere: "Affectueuse",
 		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
 		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
 		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
@@ -78,6 +102,9 @@ const animals = ref([
 		id: 1,
 		name: 'Lacy',
 		age: '2 ans',
+		sexe: "Femelle",
+		activite: "Dormir",
+		caractere: "Affectueuse",
 		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
 		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
 		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
@@ -87,6 +114,9 @@ const animals = ref([
 		id: 2,
 		name: 'Daizy',
 		age: '3 ans',
+		sexe: "Femelle",
+		activite: "Dormir",
+		caractere: "Affectueuse",
 		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
 		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
 		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
@@ -96,6 +126,9 @@ const animals = ref([
 		id: 1,
 		name: 'Lacy',
 		age: '2 ans',
+		sexe: "Femelle",
+		activite: "Dormir",
+		caractere: "Affectueuse",
 		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
 		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
 		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
@@ -105,6 +138,9 @@ const animals = ref([
 		id: 2,
 		name: 'Daizy',
 		age: '3 ans',
+		sexe: "Femelle",
+		activite: "Dormir",
+		caractere: "Affectueuse",
 		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
 		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
 		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
@@ -127,7 +163,7 @@ function closeModal() {
 	<div class="animals">
 		<div v-for="animal in animals" :key="animal.id" class="animalCard">
 			<img :src="animal.image" :alt="animal.name" class="animalImage" />
-			<h3>{{ animal.name }}</h3>
+			<h1>{{ animal.name }}</h1>
 			<button @click="openModal(animal)">En savoir plus sur moi </button>
 
 			<!-- Modal -->
@@ -135,9 +171,15 @@ function closeModal() {
 				<div class="modalContent">
 					<div class="modalInfo">
 						<h2>{{ selectedAnimal.name }}</h2>
-						<p><strong>Âge:</strong> {{ selectedAnimal.age }}</p>
-						<p><strong>Santé générale:</strong> {{ selectedAnimal.situationMedicale }}</p>
-						<p><strong>Description:</strong> {{ selectedAnimal.description }}</p>
+						<div class="info">
+							<p><strong>Âge:</strong> {{ selectedAnimal.age }}</p>
+							<p><strong>Sexe:</strong> {{ selectedAnimal.sexe }}</p>
+							<p><strong>Santé générale:</strong> {{ selectedAnimal.situationMedicale }}</p>
+							<p><strong>Caractère:</strong> {{ selectedAnimal.caractere }}</p>
+							<p><strong>Activité:</strong> {{ selectedAnimal.activite }}</p>
+							<p><strong>Description:</strong> {{ selectedAnimal.description }}</p>
+
+						</div>
 						<button class="closeButton" @click.stop="closeModal">&times;</button>
 					</div>
 					<div class="modalImages">
@@ -165,6 +207,14 @@ function closeModal() {
 	text-align: center;
 	position: relative;
 	width: 400px;
+	background: #f9f9f9;
+	/* Couleur de fond plus douce */
+	transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.animalCard:hover {
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+	transform: translateY(-5px);
 }
 
 .animalImage {
@@ -223,6 +273,12 @@ button:active {
 	gap: 40px;
 }
 
+.info {
+	display: flex;
+	flex-direction: column;
+	margin-top: 50px;
+}
+
 .closeButton {
 	position: absolute;
 	top: 10px;
@@ -232,29 +288,35 @@ button:active {
 	font-size: 36px;
 	color: #FF7D29;
 	cursor: pointer;
-	transition: color 0.3s;
 }
+
+.closeButton:hover {
+	background-color: #FFBF78;
+}
+
 
 .modalInfo {
 	flex: 1;
-	font-size: 24px;
+	font-size: 18px;
 }
 
 .modalInfo h2 {
-	font-size: 40px;
+	font-size: 36px;
 	margin-bottom: 20px;
+	color: #FF7D29;
 }
 
 .modalInfo p {
 	font-size: 24px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
+	line-height: 2;
 }
 
 .modalImages {
 	flex: 1;
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
+	gap: 10px;
 }
 
 .modalImage {
@@ -282,15 +344,15 @@ button:active {
 	}
 
 	.modalInfo {
-		font-size: 20px;
+		font-size: 16px;
 	}
 
 	.modalInfo h2 {
-		font-size: 32px;
+		font-size: 28px;
 	}
 
 	.modalInfo p {
-		font-size: 20px;
+		font-size: 16px;
 	}
 }
 
@@ -306,7 +368,6 @@ button:active {
 
 	.modalImage {
 		max-height: 200px;
-
 	}
 }
 </style>
