@@ -8,7 +8,7 @@ const animals = ref([
 		age: '2 ans',
 		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
 		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
-		description: 'Un gentil chien',
+		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
 		situationMedicale: 'En bonne santé'
 	},
 	{
@@ -17,7 +17,7 @@ const animals = ref([
 		age: '3 ans',
 		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
 		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
-		description: 'Un adorable chat',
+		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
 		situationMedicale: 'Vacciné et stérilisé'
 	},
 	{
@@ -26,7 +26,7 @@ const animals = ref([
 		age: '2 ans',
 		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
 		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
-		description: 'Un gentil chien',
+		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
 		situationMedicale: 'En bonne santé'
 	},
 	{
@@ -35,7 +35,7 @@ const animals = ref([
 		age: '3 ans',
 		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
 		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
-		description: 'Un adorable chat',
+		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
 		situationMedicale: 'Vacciné et stérilisé'
 	},
 	{
@@ -44,7 +44,7 @@ const animals = ref([
 		age: '2 ans',
 		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
 		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
-		description: 'Un gentil chien',
+		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
 		situationMedicale: 'En bonne santé'
 	},
 	{
@@ -53,7 +53,7 @@ const animals = ref([
 		age: '3 ans',
 		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
 		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
-		description: 'Un adorable chat',
+		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
 		situationMedicale: 'Vacciné et stérilisé'
 	},
 	{
@@ -62,7 +62,7 @@ const animals = ref([
 		age: '2 ans',
 		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
 		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
-		description: 'Un gentil chien',
+		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
 		situationMedicale: 'En bonne santé'
 	},
 	{
@@ -71,7 +71,43 @@ const animals = ref([
 		age: '3 ans',
 		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
 		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
-		description: 'Un adorable chat',
+		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
+		situationMedicale: 'Vacciné et stérilisé'
+	},
+	{
+		id: 1,
+		name: 'Lacy',
+		age: '2 ans',
+		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
+		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
+		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
+		situationMedicale: 'En bonne santé'
+	},
+	{
+		id: 2,
+		name: 'Daizy',
+		age: '3 ans',
+		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
+		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
+		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
+		situationMedicale: 'Vacciné et stérilisé'
+	},
+	{
+		id: 1,
+		name: 'Lacy',
+		age: '2 ans',
+		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
+		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
+		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
+		situationMedicale: 'En bonne santé'
+	},
+	{
+		id: 2,
+		name: 'Daizy',
+		age: '3 ans',
+		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
+		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
+		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
 		situationMedicale: 'Vacciné et stérilisé'
 	},
 ]);
@@ -92,25 +128,27 @@ function closeModal() {
 		<div v-for="animal in animals" :key="animal.id" class="animalCard">
 			<img :src="animal.image" :alt="animal.name" class="animalImage" />
 			<h3>{{ animal.name }}</h3>
-			<button @click="openModal(animal)">Voir plus</button>
+			<button @click="openModal(animal)">En savoir plus sur moi </button>
 
 			<!-- Modal -->
 			<div v-if="selectedAnimal && selectedAnimal.id === animal.id" class="modal" @click.self="closeModal">
 				<div class="modalContent">
 					<div class="modalInfo">
 						<h2>{{ selectedAnimal.name }}</h2>
-						<p><strong>Description:</strong> {{ selectedAnimal.description }}</p>
 						<p><strong>Âge:</strong> {{ selectedAnimal.age }}</p>
-						<p><strong>Situation Médicale:</strong> {{ selectedAnimal.situationMedicale }}</p>
-						<button @click="closeModal">Fermer</button>
+						<p><strong>Santé générale:</strong> {{ selectedAnimal.situationMedicale }}</p>
+						<p><strong>Description:</strong> {{ selectedAnimal.description }}</p>
+						<button @click="closeModal"></button>
 					</div>
-					<img :src="selectedAnimal.image" :alt="selectedAnimal.name" class="modalImage" />
+					<div class="modalImages">
+						<img :src="selectedAnimal.image" :alt="selectedAnimal.name" class="modalImage" />
+						<img :src="selectedAnimal.image2" :alt="selectedAnimal.name" class="modalImage" />
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </template>
-
 
 <style scoped>
 .animals {
@@ -136,10 +174,33 @@ function closeModal() {
 	border-radius: 8px;
 }
 
+button {
+	background-color: #FF7D29;
+	color: white;
+	padding: 12px 24px;
+	border: none;
+	border-radius: 25px;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.3s ease, transform 0.3s ease;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+	background-color: #FFBF78;
+	transform: scale(1.05);
+}
+
+button:active {
+	background-color: #FFEEA9;
+	transform: scale(0.98);
+}
+
 .modal {
 	position: fixed;
 	top: 0;
-	left: 0;
+	left:0;
 	width: 100%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.5);
@@ -177,9 +238,16 @@ function closeModal() {
 	margin-bottom: 20px;
 }
 
+.modalImages {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
 .modalImage {
-	width: 50%;
-	height: 100%;
+	width: 100%;
+	height: 49%;
 	object-fit: cover;
 	border-radius: 8px;
 }
@@ -196,10 +264,14 @@ function closeModal() {
 		height: auto;
 	}
 
-	.modalImage {
+	.modalImages {
 		width: 100%;
-		height: auto;
-		max-height: 300px;
+		flex-direction: row;
+	}
+
+	.modalImage {
+		width: 49%;
+		height: 200px;
 	}
 
 	.modalInfo {
@@ -226,7 +298,8 @@ function closeModal() {
 	}
 
 	.modalImage {
-		max-height: 200px;
+		width: 100%;
+		height: 150px;
 	}
 }
 </style>
