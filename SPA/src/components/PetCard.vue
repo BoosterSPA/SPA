@@ -1,35 +1,5 @@
-<script setup>
-import { ref } from 'vue';
-
-const animals = ref([
-	{ id: 1, name: 'Chien', image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg', description: 'Un gentil chien' },
-	{ id: 2, name: 'Chat', image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain', description: 'Un adorable chat' },
-	{ id: 1, name: 'Chien', image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg', description: 'Un gentil chien' },
-	{ id: 2, name: 'Chat', image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain', description: 'Un adorable chat' },
-	{ id: 1, name: 'Chien', image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg', description: 'Un gentil chien' },
-	{ id: 2, name: 'Chat', image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain', description: 'Un adorable chat' },
-	{ id: 1, name: 'Chien', image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg', description: 'Un gentil chien' },
-	{ id: 2, name: 'Chat', image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain', description: 'Un adorable chat' },
-	{ id: 1, name: 'Chien', image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg', description: 'Un gentil chien' },
-	{ id: 2, name: 'Chat', image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain', description: 'Un adorable chat' },
-]);
-
-const selectedAnimal = ref(null);
-
-function openModal(animal) {
-	selectedAnimal.value = animal;
-}
-
-function closeModal() {
-	selectedAnimal.value = null;
-}
-</script>
-
-
-
-
 <template>
-	
+	<!-- Card -->
 	<div class="animals">
 		<div v-for="animal in animals" :key="animal.id" class="animalCard">
 			<img :src="animal.image" :alt="animal.name" class="animalImage" />
@@ -49,29 +19,92 @@ function closeModal() {
 	</div>
 </template>
 
+<script setup>
+import { ref } from 'vue';
 
+const animals = ref([
+	{
+		id: 1,
+		name: 'Lacy',
+		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
+		description: 'Un gentil chien'
+	},
+	{
+		id: 2,
+		name: 'Daizy',
+		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
+		description: 'Un adorable chat'
+	},
+	{
+		id: 3,
+		name: 'Bella',
+		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
+		description: 'Un gentil chien'
+	},
+	{
+		id: 4,
+		name: 'Kitty',
+		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
+		description: 'Un adorable chat'
+	},
+	{
+		id: 1,
+		name: 'Lacy',
+		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
+		description: 'Un gentil chien'
+	},
+	{
+		id: 2,
+		name: 'Daizy',
+		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
+		description: 'Un adorable chat'
+	},
+	{
+		id: 3,
+		name: 'Bella',
+		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
+		description: 'Un gentil chien'
+	},
+	{
+		id: 4,
+		name: 'Kitty',
+		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
+		description: 'Un adorable chat'
+	},
+]);
+
+const selectedAnimal = ref(null);
+
+function openModal(animal) {
+	selectedAnimal.value = animal;
+}
+
+function closeModal() {
+	selectedAnimal.value = null;
+}
+</script>
 
 <style scoped>
 .animals {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 16px;
+	gap: 32px;
 	justify-content: center;
 }
 
 .animalCard {
 	border: 1px solid #ddd;
-	padding: 16px;
+	padding: 24px;
 	border-radius: 8px;
 	text-align: center;
 	position: relative;
-	width: 200px;
+	width: 400px;
 }
 
 .animalImage {
 	width: 100%;
-	height: 150px;
-	object-fit: cover;	/* Assure que l'image couvre la zone sans déformer */
+	height: 300px;
+	object-fit: cover;
 	border-radius: 8px;
 }
 
@@ -85,6 +118,7 @@ function closeModal() {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	z-index: 1000;
 }
 
 .modalContent {
@@ -103,5 +137,22 @@ function closeModal() {
 	max-height: 300px;
 	object-fit: cover;
 	border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+	.animalCard {
+		width: 100%;
+		margin: 0 16px;
+	}
+}
+
+@media (max-width: 480px) {
+	.animalImage {
+		height: 200px;
+	}
+
+	.modalContent {
+		max-width: 90%;
+	}
 }
 </style>
