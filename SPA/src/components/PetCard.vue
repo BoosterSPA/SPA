@@ -1,24 +1,3 @@
-<template>
-	<!-- Card -->
-	<div class="animals">
-		<div v-for="animal in animals" :key="animal.id" class="animalCard">
-			<img :src="animal.image" :alt="animal.name" class="animalImage" />
-			<h3>{{ animal.name }}</h3>
-			<button @click="openModal(animal)">Voir plus</button>
-
-			<!-- Modal -->
-			<div v-if="selectedAnimal && selectedAnimal.id === animal.id" class="modal" @click.self="closeModal">
-				<div class="modalContent">
-					<h2>{{ selectedAnimal.name }}</h2>
-					<img :src="selectedAnimal.image" :alt="selectedAnimal.name" class="modalImage" />
-					<p>{{ selectedAnimal.description }}</p>
-					<button @click="closeModal">Fermer</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</template>
-
 <script setup>
 import { ref } from 'vue';
 
@@ -26,50 +5,74 @@ const animals = ref([
 	{
 		id: 1,
 		name: 'Lacy',
+		age: '2 ans',
 		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
-		description: 'Un gentil chien'
+		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
+		description: 'Un gentil chien',
+		situationMedicale: 'En bonne santé'
 	},
 	{
 		id: 2,
 		name: 'Daizy',
+		age: '3 ans',
 		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
-		description: 'Un adorable chat'
-	},
-	{
-		id: 3,
-		name: 'Bella',
-		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
-		description: 'Un gentil chien'
-	},
-	{
-		id: 4,
-		name: 'Kitty',
-		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
-		description: 'Un adorable chat'
+		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
+		description: 'Un adorable chat',
+		situationMedicale: 'Vacciné et stérilisé'
 	},
 	{
 		id: 1,
 		name: 'Lacy',
+		age: '2 ans',
 		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
-		description: 'Un gentil chien'
+		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
+		description: 'Un gentil chien',
+		situationMedicale: 'En bonne santé'
 	},
 	{
 		id: 2,
 		name: 'Daizy',
+		age: '3 ans',
 		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
-		description: 'Un adorable chat'
+		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
+		description: 'Un adorable chat',
+		situationMedicale: 'Vacciné et stérilisé'
 	},
 	{
-		id: 3,
-		name: 'Bella',
+		id: 1,
+		name: 'Lacy',
+		age: '2 ans',
 		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
-		description: 'Un gentil chien'
+		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
+		description: 'Un gentil chien',
+		situationMedicale: 'En bonne santé'
 	},
 	{
-		id: 4,
-		name: 'Kitty',
+		id: 2,
+		name: 'Daizy',
+		age: '3 ans',
 		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
-		description: 'Un adorable chat'
+		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
+		description: 'Un adorable chat',
+		situationMedicale: 'Vacciné et stérilisé'
+	},
+	{
+		id: 1,
+		name: 'Lacy',
+		age: '2 ans',
+		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
+		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
+		description: 'Un gentil chien',
+		situationMedicale: 'En bonne santé'
+	},
+	{
+		id: 2,
+		name: 'Daizy',
+		age: '3 ans',
+		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
+		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
+		description: 'Un adorable chat',
+		situationMedicale: 'Vacciné et stérilisé'
 	},
 ]);
 
@@ -83,6 +86,31 @@ function closeModal() {
 	selectedAnimal.value = null;
 }
 </script>
+
+<template>
+	<div class="animals">
+		<div v-for="animal in animals" :key="animal.id" class="animalCard">
+			<img :src="animal.image" :alt="animal.name" class="animalImage" />
+			<h3>{{ animal.name }}</h3>
+			<button @click="openModal(animal)">Voir plus</button>
+
+			<!-- Modal -->
+			<div v-if="selectedAnimal && selectedAnimal.id === animal.id" class="modal" @click.self="closeModal">
+				<div class="modalContent">
+					<div class="modalInfo">
+						<h2>{{ selectedAnimal.name }}</h2>
+						<p><strong>Description:</strong> {{ selectedAnimal.description }}</p>
+						<p><strong>Âge:</strong> {{ selectedAnimal.age }}</p>
+						<p><strong>Situation Médicale:</strong> {{ selectedAnimal.situationMedicale }}</p>
+						<button @click="closeModal">Fermer</button>
+					</div>
+					<img :src="selectedAnimal.image" :alt="selectedAnimal.name" class="modalImage" />
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
 
 <style scoped>
 .animals {
@@ -123,18 +151,35 @@ function closeModal() {
 
 .modalContent {
 	background: #fff;
-	padding: 20px;
+	padding: 40px;
 	border-radius: 8px;
-	text-align: center;
+	text-align: left;
 	position: relative;
-	max-width: 600px;
-	width: 100%;
+	max-width: 1200px;
+	width: 90%;
+	height: 80%;
+	display: flex;
+	gap: 40px;
+}
+
+.modalInfo {
+	flex: 1;
+	font-size: 24px;
+}
+
+.modalInfo h2 {
+	font-size: 40px;
+	margin-bottom: 20px;
+}
+
+.modalInfo p {
+	font-size: 24px;
+	margin-bottom: 20px;
 }
 
 .modalImage {
-	width: 100%;
-	height: auto;
-	max-height: 300px;
+	width: 50%;
+	height: 100%;
 	object-fit: cover;
 	border-radius: 8px;
 }
@@ -143,6 +188,30 @@ function closeModal() {
 	.animalCard {
 		width: 100%;
 		margin: 0 16px;
+	}
+
+	.modalContent {
+		flex-direction: column;
+		padding: 20px;
+		height: auto;
+	}
+
+	.modalImage {
+		width: 100%;
+		height: auto;
+		max-height: 300px;
+	}
+
+	.modalInfo {
+		font-size: 20px;
+	}
+
+	.modalInfo h2 {
+		font-size: 32px;
+	}
+
+	.modalInfo p {
+		font-size: 20px;
 	}
 }
 
@@ -153,6 +222,11 @@ function closeModal() {
 
 	.modalContent {
 		max-width: 90%;
+		padding: 20px;
+	}
+
+	.modalImage {
+		max-height: 200px;
 	}
 }
 </style>
