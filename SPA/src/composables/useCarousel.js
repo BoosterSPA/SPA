@@ -2,7 +2,7 @@ import axios from "axios";
 import { onMounted, ref } from "vue";
 
 export function useCarousel() {
-    const API = "http://localhost:3000/chien"
+    const API = "http://localhost:3000/animal"
     let carousel = ref(null)
 
     async function load() {

@@ -1,33 +1,74 @@
 {
-    "chien" :    
+    "animal" :    
 [         {
             "name": "Chien",
+            "specie" : "chien",
             "age": 13,
             "race": "Croisé Labrador",
+            "sexe" : "Mâle",
             "img": "https://www.ecole-du-chien.fr/wp-content/uploads/2018/03/1-6-495x400.jpg"
         },
         {
             "name": "Chien",
+            "specie" : "chien",
             "age": 13,
             "race": "Croisé Labrador",
+            "sexe" : "Mâle",
             "img": "https://www.wanimo.com/veterinaire/wp-content/uploads/2011/04/images_articles_chien_bouvier-assis@2x.jpg"
         },
         {
             "name": "Chien",
+            "specie" : "chien",
             "age": 13,
             "race": "Croisé Labrador",
+            "sexe" : "Femelle",
             "img": "https://img.20mn.fr/o9Jjsp84Q5mip-tYhNLD7yk/1444x920_berger-malinois-illustration"
         },
         {
             "name": "Chien",
+            "specie" : "chien",
             "age": 13,
             "race": "Croisé Labrador",
+            "sexe" : "Femelle",
             "img": "https://www.ecole-du-chien.fr/wp-content/uploads/2016/10/image_chien_de_race_golden-retriever-1-1-1030x659-1.jpg"
         },
         {
             "name": "Chien",
+            "specie" : "chien",
             "age": 13,
             "race": "Croisé Labrador",
             "img": "https://www.vetbotanic.com/wp-content/uploads/2023/12/conseils-poil-chien-scaled.jpg"
-        }]
+        },
+    {
+        "name" : "Juan",
+        "specie" : "chat",
+        "age" : 9,
+        "sexe" : "Mâle",
+        "img" : "https://france3-regions.francetvinfo.fr/image/ioqGJbBjjk8McsAe7Oflhgs6Ofs/3872x2592/regions/2023/11/23/dsc-0025-1-655f21700b2c4927769660.jpg",
+        "appartement" : true
+    },
+    {
+        "name" : "Juan",
+        "specie" : "chat",
+        "age" : 9,
+        "sexe" : "Femelle",
+        "img" : "https://feelloo.com/wp-content/uploads/2019/10/jeune-chat-pexels-104827-900x598.jpeg",
+        "appartement" : false
+    },
+    {
+        "name" : "Juan",
+        "specie" : "chat",
+        "age" : 9,
+        "sexe" : "Femelle",
+        "img" : "https://static.nationalgeographic.fr/files/styles/image_3200/public/75552.ngsversion.1422285553360.jpg?w=1600&h=900",
+        "appartement" : true
+    },
+    {
+        "name" : "Juan",
+        "specie" : "chat",
+        "age" : 9,
+        "sexe" : "Mâle",
+        "img" : "https://www.zooplus.fr/magazine/wp-content/uploads/2019/06/comprendre-le-langage-des-chats.jpg",
+        "appartement" : false
+    }]
 }

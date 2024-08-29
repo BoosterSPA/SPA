@@ -8,6 +8,7 @@ import './style/global.css'
       <nav>
         <RouterLink to="/testpage">Test Page</RouterLink>
         <RouterLink to="/contact">Contact</RouterLink>
+        <RouterLink to="/accueil">Accueil</RouterLink>
       </nav>
 
   </header>

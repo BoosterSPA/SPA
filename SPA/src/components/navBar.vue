@@ -4,7 +4,11 @@
 
 <template>
     <div>
-        <router-link to="/accueil">Accueil</router-link>
+              <nav>
+        <RouterLink to="/testpage">Test Page</RouterLink>
+        <RouterLink to="/contact">Contact</RouterLink>
+        <RouterLink to="/accueil">Accueil</RouterLink>
+      </nav>
     </div>
 </template>
 
