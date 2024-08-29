@@ -15,7 +15,10 @@ html {
     font-family: 'Poppins',sans-serif;
     color: var(--main-color);
 }
-
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
 
 
 

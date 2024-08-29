@@ -5,7 +5,7 @@
 <template>
     <header>
     <div class="container">
-        <RouterLink to="/accueil"><h1><img src="https://upload.wikimedia.org/wikipedia/fr/0/00/Logo_de_la_SPA_%28France%29.png" alt="Logo SPA"></h1></RouterLink>
+        <RouterLink to="/accueil"><h1><img src="https://upload.wikimedia.org/wikipedia/fr/0/00/Logo_de_la_SPA_%28France%29.png" alt="SPA"></h1></RouterLink>
     <div class="nav">
         <navBar />
     </div>
@@ -28,6 +28,7 @@ img {
 }
 header {
     width: 100vw;
+    height: 15vh;
     color: var(--secondary-color);
     background: rgb(255,125,41);
     background: linear-gradient(180deg, rgba(255,125,41,1) 0%, rgba(254,255,210,1) 100%);
