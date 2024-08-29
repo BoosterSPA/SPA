@@ -22,6 +22,10 @@ import carouselComponent from '@/components/carouselComponent.vue';
         <carouselComponent />
         <RouterLink to="/testpage"><button>Voir tous les animaux</button></Routerlink>
     </div>
+    <div class="locaux">
+        <h3>Nos locaux</h3>
+        <img src="https://phrnleng.rosselcdn.net/sites/default/files/dpistyles_v2/ena_16_9_extra_big/2021/11/23/node_130498/3132443/public/2021/11/23/B9729095435Z.1_20211123155520_000%2BGQEJCQG47.1-0.jpg?itok=C_Cbn0n_1638722245" alt="">
+    </div>
 </template>
 
 <style scoped>
@@ -62,5 +66,17 @@ button:active {
 }
 aside p {
     margin: 0.7rem 0;
+}
+.locaux img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    height: 400px;
+}
+.locaux h3 {
+    text-align: center;
+}
+.locaux{
+    margin: 1rem 0;
 }
 </style>
