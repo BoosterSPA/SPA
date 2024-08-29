@@ -2,7 +2,7 @@
 import { useCarousel } from '@/composables/useCarousel';
 import { VueperSlides, VueperSlide } from 'vueperslides'
 import 'vueperslides/dist/vueperslides.css'
-const { carousel } = useCarousel()
+const { carousel } = useCarousel("animal")
 </script>
 
 <template>
@@ -11,8 +11,8 @@ const { carousel } = useCarousel()
 
         <h2>Nos animaux du moment</h2>
         <vueper-slides class="no-shadow" fixed-height="300px"
-            :breakpoints="{ 800: { visibleSlides: 1 }, 1200: { visibleSlides: 2 } }" arrows-outside slide-image-inside
-            :touchable="false" :bullets="false" :infinite="true" :visibleSlides=3 :gap="3">
+            :breakpoints="{ 800: { visibleSlides: 1 }, 1200: { visibleSlides: 2 } }" arrows-outside
+            :touchable="false" :infinite="true" :visibleSlides=3 :gap="3">
 
             <vueper-slide v-for="animal in carousel" :key="animal.name" class="slide">
                 <template #content>
@@ -37,11 +37,6 @@ const { carousel } = useCarousel()
 </template>
 
 <style scoped>
-.carousel {
-    width: 80%;
-
-    margin: 0 auto;
-}
 
 img {
     width: 100%;

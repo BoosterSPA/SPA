@@ -14,17 +14,8 @@
 html {
     font-family: 'Poppins',sans-serif;
     color: var(--main-color);
-    height: 200vh;
 }
-a:link, a:visited {
-    text-decoration: none;
-    color: var(--main-color);  
-    padding: 1rem;
-}
-a:hover {
-    color: var(--secondary-color);
-    transition: 0.5s;
-}
+
 
 
 
