@@ -1,9 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import testPage from "@/pages/testPage.vue";
+import adoptionPage from "@/pages/adoptionPage.vue";
+import adminPage from "@/pages/adminPage.vue";
 
 const router = createRouter({
 	routes: [
-		{ path: '/testpage', component: testPage }],
+		{ path: '/adoptionPage', component: adoptionPage },
+		{ path: '/adminPage', component: adminPage }],
+
 	history: createWebHistory()
 })
 
