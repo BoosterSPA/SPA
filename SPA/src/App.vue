@@ -4,7 +4,9 @@
 
 
 <template>
-    <router-view />
+  <div id="app">
+    <router-view></router-view>
+  </div>
 </template>
 
 <style scoped>
@@ -14,3 +16,5 @@ main {
 }
 
 </style>
+
+
