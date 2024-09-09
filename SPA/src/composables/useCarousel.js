@@ -1,8 +1,8 @@
 import axios from "axios";
 import { onMounted, ref } from "vue";
 
-export function useCarousel() {
-    const API = "http://localhost:3000/animal"
+export function useCarousel(req) {
+    const API = "http://localhost:3000/" + req
     let carousel = ref(null)
 
     async function load() {
@@ -14,7 +14,6 @@ export function useCarousel() {
         }
     }
 onMounted( () => {
-    console.log("oui")
     load()
 })
 return {carousel,load}

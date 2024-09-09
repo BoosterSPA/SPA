@@ -1,19 +1,14 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import './style/global.css'
+import headerComponent from './components/headerComponent.vue';
+import footerComponent from './components/footerComponent.vue';
 </script>
 
 <template>
-  <header>
-      <nav>
-        <RouterLink to="/testpage">Test Page</RouterLink>
-        <RouterLink to="/contact">Contact</RouterLink>
-        <RouterLink to="/accueil">Accueil</RouterLink>
-      </nav>
-
-  </header>
-
+  <headerComponent />
   <RouterView />
+  <footerComponent />
 </template>
 
 <style scoped>
