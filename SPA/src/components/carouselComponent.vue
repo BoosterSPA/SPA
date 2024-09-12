@@ -92,6 +92,7 @@ button {
 button:hover {
     background-color: #FFBF78;
     transform: scale(1.05);
+    cursor: pointer;
 }
 
 button:active {

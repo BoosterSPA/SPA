@@ -14,38 +14,124 @@
 </template>
 
 <style scoped>
-:root{
-    --main-color : #FF7D29;
-    --secondary-color : #FFBF78;
-    --tertiary-color : #FEFFD2;
-    --font : '"Poppins", sans-serif;'
+:root {
+    --main-color: #FF6F3C; /* Orange moderne */
+    --secondary-color: #FFBF78;
+    --tertiary-color: #FEFFD2;
+    --font-family: 'Poppins', sans-serif;
+    --font-size-base: 16px;
+    --font-size-large: 1.5rem;
+    --font-size-medium: 1.2rem;
+    --font-size-small: 0.9rem;
+    --header-height: 20vh;
+    --container-width: 80%;
+    --transition-duration: 0.4s;
 }
-img {
-    width: 10vw;
-    aspect-ratio: 1/1;
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+    font-family: var(--font-family);
+}
+
+body {
+    font-size: var(--font-size-base);
+    color: var(--main-color);
+    background-color: #f5f5f5;
+}
+
+img {
+    width: 8vw;
+    max-width: 120px;
+    height: auto;
+    object-fit: contain;
     margin: 0 auto;
 }
-header {
-    width: 100vw;
-    height: 15vh;
-    color: var(--secondary-color);
-    background: rgb(255,125,41);
-    background: linear-gradient(180deg, rgba(255,125,41,1) 0%, rgba(254,255,210,1) 100%);
-    margin:0 0 1rem 0;
-    padding: 1rem 0;
 
+/* Header Styling */
+header {
+    width: 100%;
+    height: var(--header-height);
+    color: var(--tertiary-color);
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: background-color var(--transition-duration) ease-in-out;
 }
-.container{
-    width: 80%;
+
+/* Container inside Header */
+.container {
+    width: var(--container-width);
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
+/* Navigation */
 .nav {
-    background-color: #feffd200;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
 }
 
+.nav a {
+    color: var(--tertiary-color);
+    text-decoration: none;
+    font-size: var(--font-size-medium);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: color var(--transition-duration), background-color var(--transition-duration);
+}
 
+.nav a:hover {
+    background-color: var(--tertiary-color);
+    color: var(--main-color);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: 400ms ease;
+}
+
+/* Hover effect for Header
+header:hover {
+    background-color: #FF5722; 
+} */
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    header {
+        height: 15vh;
+        padding: 0.5rem 0;
+    }
+
+    .container {
+        width: 90%;
+        flex-direction: column;
+    }
+
+    .nav {
+        flex-direction: column;
+        gap: 0.8rem;
+        margin-top: 1rem;
+    }
+
+    img {
+        width: 15vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav a {
+        font-size: var(--font-size-small);
+        padding: 0.3rem 0.8rem;
+    }
+
+    img {
+        width: 20vw;
+    }
+}
 </style>

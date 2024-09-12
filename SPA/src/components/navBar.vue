@@ -16,21 +16,38 @@ import { Slide } from 'vue-burger-menu'
 </template>
 
 <style scoped>
-a:link,
-a:visited {
+a {
+    color: black; /* Couleur du texte avant le survol */
     text-decoration: none;
-    color: black;
     padding: 0.7rem;
     margin: 0 1rem;
     border-radius: 20px;
     font-size: 1.2rem;
+    position: relative; /* Required for the pseudo-element */
+    overflow: hidden; /* Ensures the underline doesn't overflow */
 }
 
+/* Pseudo-element for the underline effect */
+a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0; /* Start from the right */
+    width: 100%;
+    height: 2px; /* Thickness of the underline */
+    background-color: #030303; /* Color of the underline */
+    transform: scaleX(0); /* Start with no width */
+    transform-origin: bottom left; /* Animate from left to right */
+    transition: transform 400ms ease; /* Smooth transition for the underline effect */
+}
+
+/* Hover effect for links */
+a:hover::after {
+    transform: scaleX(1); /* Expand the underline to full width */
+}
 
 a:hover {
-    color: var(--main-color);
-    background-color: aliceblue;
-
-    transition: 0.5s;
+    color: #030303; /* Change the text color to white on hover */
+    transition: color 0.4s ease;
 }
 </style>
