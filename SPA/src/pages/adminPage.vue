@@ -1,254 +1,406 @@
 <script setup>
-import { ref } from 'vue';
-import PetCard from "@/components//PetCard.vue"
+import { ref, computed, onMounted } from 'vue';
 
-// État pour suivre la catégorie sélectionnée
+// Chargement des données depuis localStorage
+const loadCategories = () => {
+  const savedCategories = localStorage.getItem('categories');
+  return savedCategories ? JSON.parse(savedCategories) : [
+    { id: 1, name: 'Chiens', image: 'src/assets/images/chien.webp' },
+    { id: 2, name: 'Chats', image: 'src/assets/images/chat.webp' }
+  ];
+};
+
+const loadAnimals = () => {
+  const savedAnimals = localStorage.getItem('animals');
+  return savedAnimals ? JSON.parse(savedAnimals) : [];
+};
+
+// Données de départ ou récupérées depuis localStorage
+const categories = ref(loadCategories());
+const animals = ref(loadAnimals());
+
+const showCategoryForm = ref(false);
+const showAnimalForm = ref(false);
+const showStatistics = ref(false);
+const showAllAnimals = ref(true);
+
+const newCategoryData = ref({ name: '', image: null });
+const newAnimalData = ref({ name: '', age: '', sexe: '', activite: '', caractere: '', image: null, image2: null, description: '', situationMedicale: '', categoryId: null });
+
 const selectedCategory = ref(null);
+const searchQuery = ref('');
 
-// État pour afficher ou cacher la modale des statistiques
-const showStatisticsModal = ref(false);
+const filteredAnimals = computed(() => {
+  if (!selectedCategory.value) return animals.value;
+  return animals.value.filter(animal => animal.categoryId === selectedCategory.value.id);
+});
 
-// Gestion des affichages conditionnels
-const displayAllAnimals = () => {
-    selectedCategory.value = 'all'; // "all" signifie tous les animaux
-};
+const filteredAnimalsBySearch = computed(() => {
+  const search = searchQuery.value.toLowerCase();
+  return filteredAnimals.value.filter(animal => animal.name.toLowerCase().includes(search));
+});
 
-const selectCategory = (category) => {
-    selectedCategory.value = category;
-};
+function saveData() {
+  localStorage.setItem('categories', JSON.stringify(categories.value));
+  localStorage.setItem('animals', JSON.stringify(animals.value));
+}
 
-const toggleStatisticsModal = () => {
-    showStatisticsModal.value = !showStatisticsModal.value;
-};
+function addCategory() {
+  if (!newCategoryData.value.name || !newCategoryData.value.image) return;
+  if (categories.value.some(cat => cat.name.toLowerCase() === newCategoryData.value.name.toLowerCase())) {
+    alert("La catégorie existe déjà.");
+    return;
+  }
+  const newCategory = { id: categories.value.length + 1, ...newCategoryData.value };
+  categories.value.push(newCategory);
+  newCategoryData.value = { name: '', image: null };
+  showCategoryForm.value = false;
+  saveData();
+}
+
+function addAnimal() {
+  if (!newAnimalData.value.name || !newAnimalData.value.image || newAnimalData.value.categoryId === null) return;
+  const newAnimal = { id: animals.value.length + 1, ...newAnimalData.value };
+  animals.value.push(newAnimal);
+  newAnimalData.value = { name: '', age: '', sexe: '', activite: '', caractere: '', image: null, image2: null, description: '', situationMedicale: '', categoryId: null };
+  showAnimalForm.value = false;
+  saveData();
+  alert('Animal ajouté avec succès!');
+  showAllAnimals.value = true;
+  showCategoryForm.value = false;
+  showStatistics.value = false;
+}
+
+function openCategoryModal(category) {
+  selectedCategory.value = category;
+}
+
+function closeCategoryModal() {
+  selectedCategory.value = null;
+}
+
+// Fonction pour ouvrir le modal d'animaux
+function openAnimalModal(animal) {
+  selectedAnimal.value = animal;
+  showAnimalModal.value = true;
+}
+
+// Fonction pour fermer le modal d'animaux
+function closeAnimalModal() {
+  selectedAnimal.value = null;
+  showAnimalModal.value = false;
+}
+
+const categoryStats = computed(() => {
+  return categories.value.map(category => ({
+    ...category,
+    animalCount: animals.value.filter(animal => animal.categoryId === category.id).length
+  }));
+});
+
+// Fonction pour gérer le chargement des images de catégorie
+function handleCategoryImageUpload(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      newCategoryData.value.image = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+// Fonction pour gérer le chargement des images d'animaux
+function handleAnimalImageUpload(event, isPrimary) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (isPrimary) {
+        newAnimalData.value.image = reader.result;
+      } else {
+        newAnimalData.value.image2 = reader.result;
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+// Fonction pour supprimer une catégorie
+function deleteCategory(category) {
+  if (confirm(`Êtes-vous sûr de vouloir supprimer la catégorie "${category.name}" et tous les animaux associés ?`)) {
+    // Filtrer les catégories pour exclure la catégorie à supprimer
+    categories.value = categories.value.filter(cat => cat.id !== category.id);
+    
+    // Filtrer les animaux pour exclure ceux associés à la catégorie supprimée
+    animals.value = animals.value.filter(animal => animal.categoryId !== category.id);
+    
+    // Sauvegarder les données mises à jour
+    saveData();
+    
+    // Optionnel : Fermer le modal de catégorie si ouvert
+    closeCategoryModal();
+  }
+}
+
+// Chargement des données à l'initialisation
+onMounted(() => {
+  categories.value = loadCategories();
+  animals.value = loadAnimals();
+});
 </script>
 
 <template>
-    <div class="dashboard">
-        <!-- Boutons d'action -->
-        <div class="buttons-container">
-
-            <button @click="displayAllAnimals" class="btn all-animals-btn">Tous les Animaux</button>
-            <button @click="toggleStatisticsModal" class="btn stats-btn">Statistiques</button>
-        </div>
-
-        <!-- Section des catégories existantes (Cards Chien et Chat) -->
-        <div class="cards-container">
-            <div class="animal-card" @click="selectCategory('chien')">
-                <h3>Chien</h3>
-                <img src="https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg" alt="Chien">
-            </div>
-            <div class="animal-card" @click="selectCategory('chat')">
-                <h3>Chat</h3>
-                <img src="https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain" alt="Chat">
-            </div>
-            <div class="animal-card add-category-card">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 4c.552 0 1 .448 1 1v6h6c.552 0 1 .448 1 1s-.448 1-1 1h-6v6c0 .552-.448 1-1 1s-1-.448-1-1v-6H5c-.552 0-1-.448-1-1s.448-1 1-1h6V5c0-.552.448-1 1-1z" />
-                </svg>
-            </div>
-        </div>
-
-        <!-- Affichage du composant PetCard en fonction de la catégorie sélectionnée -->
-        <div v-if="selectedCategory">
-            <PetCard :category="selectedCategory" />
-        </div>
-
-        <!-- Modale des statistiques -->
-        <div v-if="showStatisticsModal" class="modal">
-            <div class="modal-content">
-                <span class="close" @click="toggleStatisticsModal">&times;</span>
-                <h2>Statistiques</h2>
-                <div class="statistics-container-modal">
-                    <div class="stat-card-modal">
-                        <h3>Total des Animaux</h3>
-                        <p>150</p>
-                    </div>
-                    <div class="stat-card-modal">
-                        <h3>Animaux Adoptés</h3>
-                        <p>75</p>
-                    </div>
-                    <div class="stat-card-modal">
-                        <h3>Animaux en Attente</h3>
-                        <p>75</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="admin-page">
+    <!-- Buttons to toggle sections -->
+    <div class="buttons">
+      <button @click="showAllAnimals = true; showCategoryForm = false; showAnimalForm = false; showStatistics = false" class="btn">Tous les Animaux</button>
+      <button @click="showAllAnimals = false; showCategoryForm = true; showAnimalForm = false; showStatistics = false" class="btn">Ajouter Catégorie</button>
+      <button @click="showAllAnimals = false; showCategoryForm = false; showAnimalForm = true; showStatistics = false" class="btn">Ajouter Animal</button>
+      <button @click="showAllAnimals = false; showCategoryForm = false; showAnimalForm = false; showStatistics = true" class="btn">Statistiques</button>
     </div>
+
+    <!-- Category Form -->
+    <div v-if="showCategoryForm" class="section">
+      <h2>Ajouter une Catégorie</h2>
+      <form @submit.prevent="addCategory">
+        <label>
+          Nom :
+          <input v-model="newCategoryData.name" type="text" />
+        </label>
+        <label>
+          Image :
+          <input @change="handleCategoryImageUpload" type="file" accept="image/*" />
+          <img v-if="newCategoryData.image" :src="newCategoryData.image" alt="Image de la catégorie" class="category-image-preview" />
+        </label>
+        <button type="submit" class="btn">Ajouter Catégorie</button>
+      </form>
+    </div>
+
+    <!-- Animal Form -->
+    <div v-if="showAnimalForm" class="section">
+      <h2>Ajouter un Animal</h2>
+      <form @submit.prevent="addAnimal">
+        <label>
+          Nom :
+          <input v-model="newAnimalData.name" type="text" />
+        </label>
+        <label>
+          Âge :
+          <input v-model="newAnimalData.age" type="text" />
+        </label>
+        <label>
+          Sexe :
+          <input v-model="newAnimalData.sexe" type="text" />
+        </label>
+        <label>
+          Activité :
+          <input v-model="newAnimalData.activite" type="text" />
+        </label>
+        <label>
+          Caractère :
+          <input v-model="newAnimalData.caractere" type="text" />
+        </label>
+        <label>
+          Image principale :
+          <input @change="e => handleAnimalImageUpload(e, true)" type="file" accept="image/*" />
+          <img v-if="newAnimalData.image" :src="newAnimalData.image" alt="Image principale de l'animal" class="animal-image-preview" />
+        </label>
+        <label>
+          Deuxième image (optionnel) :
+          <input @change="e => handleAnimalImageUpload(e, false)" type="file" accept="image/*" />
+          <img v-if="newAnimalData.image2" :src="newAnimalData.image2" alt="Deuxième image de l'animal" class="animal-image-preview" />
+        </label>
+        <label>
+          Description :
+          <textarea v-model="newAnimalData.description"></textarea>
+        </label>
+        <label>
+          Situation médicale :
+          <textarea v-model="newAnimalData.situationMedicale"></textarea>
+        </label>
+        <label>
+          Catégorie :
+          <select v-model="newAnimalData.categoryId">
+            <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+          </select>
+        </label>
+        <button type="submit" class="btn">Ajouter Animal</button>
+      </form>
+    </div>
+
+    <!-- Animal Statistics Section -->
+    <div v-if="showStatistics" class="section">
+      <h2>Statistiques des Catégories</h2>
+      <ul>
+        <li v-for="category in categoryStats" :key="category.id">
+          {{ category.name }}: {{ category.animalCount }} animaux
+        </li>
+      </ul>
+    </div>
+
+    <!-- Animal List with Filter -->
+    <div v-if="showAllAnimals" class="section">
+      <h2>Liste des Animaux</h2>
+      <label>
+        Rechercher :
+        <input v-model="searchQuery" type="text" placeholder="Rechercher par nom" />
+      </label>
+      <div class="category-list">
+        <div v-for="category in categories" :key="category.id" class="category-card">
+          <img :src="category.image" :alt="category.name" class="category-image" />
+          <h3>{{ category.name }}</h3>
+          <button @click="openCategoryModal(category)">Voir Détails</button>
+          <button @click="deleteCategory(category)" class="btn btn-delete">Supprimer</button>
+        </div>
+      </div>
+      <div class="animal-list">
+        <div v-for="animal in filteredAnimalsBySearch" :key="animal.id" class="animal-card">
+          <img :src="animal.image" :alt="animal.name" class="animal-image" />
+          <h3>{{ animal.name }}</h3>
+          <button @click="openAnimalModal(animal)">Voir Détails</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for Animal Details -->
+    <div v-if="selectedAnimal" class="modal" @click.self="closeAnimalModal">
+      <div class="modal-content">
+        <button class="close-button" @click="closeAnimalModal">&times;</button>
+        <h2>{{ selectedAnimal.name }}</h2>
+        <div class="modal-info">
+          <p><strong>Âge:</strong> {{ selectedAnimal.age }}</p>
+          <p><strong>Sexe:</strong> {{ selectedAnimal.sexe }}</p>
+          <p><strong>Activité:</strong> {{ selectedAnimal.activite }}</p>
+          <p><strong>Caractère:</strong> {{ selectedAnimal.caractere }}</p>
+          <p><strong>Description:</strong> {{ selectedAnimal.description }}</p>
+          <p><strong>Situation médicale:</strong> {{ selectedAnimal.situationMedicale }}</p>
+        </div>
+        <div class="modal-images">
+          <img :src="selectedAnimal.image" :alt="selectedAnimal.name" class="modal-image" />
+          <img v-if="selectedAnimal.image2" :src="selectedAnimal.image2" :alt="selectedAnimal.name + ' - 2'" class="modal-image" />
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
-
 <style scoped>
-/* Mise en page principale */
-.dashboard {
-    padding: 20px;
-    font-family: 'Arial', sans-serif;
+.admin-page {
+  padding: 20px;
 }
 
-/* Conteneur des boutons */
-.buttons-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 30px;
+.buttons {
+  margin-bottom: 20px;
 }
 
-/* Style général pour les boutons */
 .btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 12px 30px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-weight: bold;
+  margin-right: 10px;
+  padding: 10px 20px;
+  background-color: #FF7D29;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .btn:hover {
-    background-color: #0056b3;
+  background-color: #FFBF78;
 }
 
-/* Style bouton Statistiques */
-.stats-btn {
-    background-color: #ffc107;
+.btn-delete {
+  background-color: #FF3D3D;
 }
 
-.stats-btn:hover {
-    background-color: #e0a800;
+.btn-delete:hover {
+  background-color: #FF8C8C;
 }
 
-/* Bouton Tous les Animaux */
-.all-animals-btn {
-    background-color: #6c757d;
+.section {
+  margin-bottom: 40px;
 }
 
-.all-animals-btn:hover {
-    background-color: #5a6268;
+.category-list, .animal-list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-/* Bouton Adoption */
-.adoption-btn {
-    background-color: #28a745;
+.category-card, .animal-card {
+  border: 1px solid #ddd;
+  padding: 16px;
+  border-radius: 8px;
+  width: 200px;
+  text-align: center;
+  cursor: pointer;
 }
 
-.adoption-btn:hover {
-    background-color: #218838;
+.category-image, .animal-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
-/* Conteneur des catégories (Cards) */
-.cards-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    height: 100vh;
+.category-image-preview, .animal-image-preview {
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  object-fit: cover;
 }
 
-.animal-card {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    text-align: center;
-    width: 350px;
-    height: 400px; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.animal-card:hover {
-    transform: translateY(-5px);
-}
-
-.animal-card img {
-    border-radius: 5px;
-    margin-top: 10px;
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-}
-
-.add-category-card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #F0F0F0;
-    color: #000000;
-}
-
-.add-category-card svg {
-    width: 50px;
-    height: 50px;
-    fill: #000000;
-}
-
-/* Modale Statistiques */
 .modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 
 .modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    width: 500px;
-    text-align: center;
-    position: relative;
+  background: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  max-width: 800px;
+  width: 90%;
+  position: relative;
 }
 
-.close {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 24px;
-    cursor: pointer;
+.modal-info {
+  margin-bottom: 20px;
 }
 
-.statistics-container-modal {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
+.modal-images {
+  display: flex;
+  gap: 10px;
 }
 
-.stat-card-modal {
-    background-color: #f8f9fa;
-    border: 1px solid #ced4da;
-    border-radius: 10px;
-    padding: 20px;
-    width: 150px;
-    text-align: center;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+.modal-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
-.stat-card-modal:hover {
-    transform: translateY(-5px);
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 36px;
+  color: #FF7D29;
+  cursor: pointer;
 }
 
-.stat-card-modal h3 {
-    font-size: 16px;
-    margin-bottom: 5px;
-    color: #343a40;
-}
-
-.stat-card-modal p {
-    font-size: 20px;
-    font-weight: bold;
-    color: #007bff;
+.close-button:hover {
+  color: #FFBF78;
 }
 </style>
