@@ -4,8 +4,8 @@ const AnimalsController = require('../controllers/AnimalsController')
 const router = express.Router();
 
 router.get("/", AnimalsController.getAllAnimals)
-// router.post("/add-books",LivreController.addBook)
-// router.put("/update/:id", LivreController.updateBook)
-// router.delete("/delete/:id", LivreController.deleteBook)
+router.post("/addAnimal",AnimalsController.addAnimal)
+router.put("/update/:id", AnimalsController.updateAnimal)
+router.delete("/delete/:id", AnimalsController.deleteAnimal)
 
 module.exports = router

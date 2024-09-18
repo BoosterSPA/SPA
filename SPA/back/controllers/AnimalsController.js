@@ -7,28 +7,32 @@ const animalsController = {
             res.json(result)
         })
     },
-    // addAnimals: (req, res) => {
-    //     const nouveauAnimal = req.body
-    //     Animals.addAnimals(nouveauLivre, (err) => {
-    //         if (err) throw err;
-    //         res.json({message: "Livre ajouté avec succès"})
-    //     })
-    // },
-    // updateAnimals: (req, res) => {
-    //     const id = req.params.id
-    //     const AnimalsModifie = req.body
-    //     Livre.updateAnimals(id, AnimalsModifie, (err) => {
-    //         if (err) throw err;
-    //         res.json({message: "Livre modifié avec succès"})
-    //     })
-    // },
-    // deleteAnimals: (req, res) => {
-    //     const id = req.params.id
-    //     Livre.deleteAnimals(id, (err) => {
-    //         if (err) throw err;
-    //         res.json({message: "Livre supprimé avec succès"})
-    //     })
-    // }
+
+    addAnimal: (req, res) => {
+        const newAnimal = req.body
+        Animals.addAnimal(newAnimal, (err) => {
+            if (err) throw err;
+            res.json({message: "Animal ajouté avec succès"})
+        })
+    },
+
+
+    updateAnimal: (req, res) => {
+        const id = req.params.id
+        const AnimalUpdated = req.body
+        Animals.updateAnimal(id, AnimalUpdated, (err) => {
+            if (err) throw err;
+            res.json({message: "Animal modifié avec succès"})
+        })
+    },
+
+    deleteAnimal: (req, res) => {
+        const id = req.params.id
+        Animals.deleteAnimal(id, (err) => {
+            if (err) throw err;
+            res.json({message: "Animal supprimé avec succès"})
+        })
+    }
 
 
 }

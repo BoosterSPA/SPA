@@ -4,18 +4,42 @@ const animals = {
     getAllAnimals: (callback) => {
         connection.query("SELECT * FROM animal", callback)
     },
-    // addAnimals: (nouveauLivre, callback) => {
-    //     connection.query("INSERT INTO livres SET ?", nouveauLivre, callback)
-    // },
-    // updateAnimals: (id, livreModifie, callback) => {
-    //     connection.query("UPDATE livres SET ? WHERE id = ?",
-    //         [livreModifie, id], 
-    //         callback
-    //         )
-    // },
-    // deleteAnimals: (id, callback) => {
-    //     connection.query("DELETE FROM livres WHERE id = ?", id ,callback)
+
+    addAnimal: (newAnimal, callback) => {
+        const values = Object.values(newAnimal);
+
+        connection.query("INSERT INTO animal (name, age, sexe, activite, caractere, profile_image, image_desc, medical, id_category) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", values, callback);
+    },
+
+
+    // addAnimal: (newAnimal, callback) => {
+    //     const query = "INSERT INTO animal (name, age, sexe, activite, caractere, profile_image, image_desc, medical, id_category) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    //     // Appelle correctement connection.query avec les valeurs et le callback
+    //     connection.query(query, [
+    //         newAnimal.name, 
+    //         newAnimal.age, 
+    //         newAnimal.sexe, 
+    //         newAnimal.activite, 
+    //         newAnimal.caractere, 
+    //         newAnimal.profile_image, 
+    //         newAnimal.image_desc, 
+    //         newAnimal.medical, 
+    //         newAnimal.id_category
+    //     ], callback);
     // }
+
+
+    updateAnimal: (id, AnimalUpdated, callback) => {
+        connection.query("UPDATE animal SET ? WHERE id = ?",
+            [AnimalUpdated, id],
+            callback
+        )
+    },
+
+    deleteAnimal: (id, callback) => {
+        connection.query("DELETE FROM animal WHERE id = ?", id ,callback)
+    }
 }
 
 module.exports = animals;
