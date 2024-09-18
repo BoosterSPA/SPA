@@ -1,6 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const AnimalsRoutes = require('./back/router/AnimalsRoute')
+const AnimalsRoutes = require('./router/AnimalsRoute')
 
 const app = express();
 const PORT = 3000;
