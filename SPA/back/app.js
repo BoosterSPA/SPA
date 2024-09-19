@@ -11,6 +11,8 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use('/animal', AnimalsRoutes)
 
+
+
 app.listen(PORT, () => {
     console.log(`Serveur en écoute sur le port ${PORT}`)
 });
