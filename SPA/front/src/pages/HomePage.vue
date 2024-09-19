@@ -15,7 +15,7 @@ import { RouterLink } from 'vue-router';
             </div>
         </aside>
         <carouselComponent />
-        <RouterLink to="/testpage">
+        <RouterLink to="/adoptionPage">
             <button class="view-animals-button">Voir tous les animaux</button>
 
         </RouterLink>

@@ -6,7 +6,7 @@ import { Slide } from 'vue-burger-menu'
     <div>
         <nav>
             <RouterLink to="/accueil">Accueil</RouterLink>
-            <RouterLink to="/testpage">Adoption</RouterLink>
+            <RouterLink to="/adoptionPage">Adoption</RouterLink>
             <RouterLink to="/contact">Contact</RouterLink>
             <RouterLink to="/contact">Donation</RouterLink>
             <RouterLink to="/contact">Partenaires</RouterLink>
