@@ -1,11 +1,9 @@
 <script setup>
-import { useCarousel } from '@/composables/useCarousel';
 import { onMounted, ref } from 'vue';
 import { VueperSlides, VueperSlide } from 'vueperslides'
 import 'vueperslides/dist/vueperslides.css'
 import axios from 'axios';
 // import AnimalsController from '../../../back/controllers/AnimalsController'
-const { carousel } = useCarousel("animal")
 let animals = ref([])
 onMounted(async() => {
     try {

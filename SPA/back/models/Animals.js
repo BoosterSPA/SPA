@@ -4,30 +4,27 @@ const animals = {
     getAllAnimals: (callback) => {
         connection.query("SELECT * FROM animal", callback)
     },
-
+    
     addAnimal: (newAnimal, callback) => {
-        const values = Object.values(newAnimal);
+        const query = "INSERT INTO animal (name, age, sexe, activite, caractere, profile_image, image_desc, medical, id_category) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        connection.query("INSERT INTO animal (name, age, sexe, activite, caractere, profile_image, image_desc, medical, id_category) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", values, callback);
+        // Appelle correctement connection.query avec les valeurs et le callback
+        connection.query(query, [
+            newAnimal.name, 
+            newAnimal.age, 
+            newAnimal.sexe, 
+            newAnimal.activite, 
+            newAnimal.caractere, 
+            newAnimal.profile_image, 
+            newAnimal.image_desc, 
+            newAnimal.medical, 
+            newAnimal.id_category
+        ], callback);
+    
     },
 
 
-    // addAnimal: (newAnimal, callback) => {
-    //     const query = "INSERT INTO animal (name, age, sexe, activite, caractere, profile_image, image_desc, medical, id_category) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    //     // Appelle correctement connection.query avec les valeurs et le callback
-    //     connection.query(query, [
-    //         newAnimal.name, 
-    //         newAnimal.age, 
-    //         newAnimal.sexe, 
-    //         newAnimal.activite, 
-    //         newAnimal.caractere, 
-    //         newAnimal.profile_image, 
-    //         newAnimal.image_desc, 
-    //         newAnimal.medical, 
-    //         newAnimal.id_category
-    //     ], callback);
-    // }
 
 
     updateAnimal: (id, AnimalUpdated, callback) => {
