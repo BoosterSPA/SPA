@@ -26,6 +26,7 @@ const newAnimal = ref({
   profile_image: "",
   image_desc: "",
   medical: "",
+  id_category :"",
 });
 
 let updatedAnimal = ref({});
@@ -78,8 +79,6 @@ async function deleteCategorie(category) {
   try {
     await axios.delete(`http://localhost:3000/animal//deleteCategory/${category.id}`);
 
-    // const response = await axios.get('http://localhost:3000/animal/getAllCategories');
-    // categories.value = response.data;
 
     const index = categories.value.indexOf(category)
     categories.value.splice(index, 1)
@@ -117,9 +116,12 @@ async function updateCategory(id) {
   }
 };
 
+
+
 async function addAnimal() {
   try {
     await axios.post("http://localhost:3000/animal/addAnimal", newAnimal.value);
+    
   } catch (error) {
     console.error(error);
   }
@@ -192,6 +194,7 @@ const categoryStats = computed(() => {
 </script>
 
 <template>
+
   <div class="admin-page">
     <!-- Buttons to toggle sections -->
     <div class="buttons">
@@ -199,18 +202,54 @@ const categoryStats = computed(() => {
         @click="showAllAnimals = true; showCategoryForm = false; showAnimalForm = false; showCategories = false; showStatistics = false; getAnimal();"
         class="btn">Tous les Animaux</button>
       <button
-        @click="showAllAnimals = false; showCategoryForm = false; showAnimalForm = false; showCategories = true; showStatistics = false; getAllCategories();"
-        class="btn">Voir toutes les Catégories</button>
+        @click="
+          showAllAnimals = true;
+          showCategoryForm = false;
+          showAnimalForm = false;
+          showStatistics = false;
+          showUpdateForm = false;
+          getAnimal();
+        "
+        class="btn"
+      >
+        Tous les Animaux
+      </button>
       <button
-        @click="showAllAnimals = false; showCategoryForm = true; showAnimalForm = false; showCategories = false; showStatistics = false"
-        class="btn">Ajouter Catégorie</button>
+        @click="
+          showAllAnimals = false;
+          showCategoryForm = true;
+          showAnimalForm = false;
+          showStatistics = false;
+          showUpdateForm = false;
+        "
+        class="btn"
+      >
+        Ajouter Catégorie
+      </button>
       <button
-        @click="showAllAnimals = false; showCategoryForm = false; showAnimalForm = true; showCategories = false; showStatistics = false"
-        class="btn">Ajouter Animal</button>
+        @click="
+          showAllAnimals = false;
+          showCategoryForm = false;
+          showAnimalForm = true;
+          showStatistics = false;
+          showUpdateForm = false;
+        "
+        class="btn"
+      >
+        Ajouter Animal
+      </button>
       <button
-        @click="showAllAnimals = false; showCategoryForm = false; showAnimalForm = false; showCategories = false; showStatistics = true"
-        class="btn">Statistiques</button>
-
+        @click="
+          showAllAnimals = false;
+          showCategoryForm = false;
+          showAnimalForm = false;
+          showStatistics = true;
+          showUpdateForm = false;
+        "
+        class="btn"
+      >
+        Statistiques
+      </button>
     </div>
 
     <!-- Formulaire d'ajout de catégorie dans une modale -->
@@ -406,6 +445,9 @@ const categoryStats = computed(() => {
         <div v-for="animal in filteredAnimalsBySearch" :key="animal.id" class="animal-card">
           <img :src="animal.profile_image" :alt="animal.name" class="animal-image" />
           <h3>{{ animal.name }}</h3>
+          <button class="btn">Voir Détails</button>
+          <button  class="btn" @click="deleteAnimal(animal.id)">Supprimer</button>
+          <button class="btn" @click="showUpdateForm = true; updatedAnimal = animal ">Modifier</button>
         </div>
       </div>
     </div>
