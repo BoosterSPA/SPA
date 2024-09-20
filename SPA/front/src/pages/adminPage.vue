@@ -452,6 +452,7 @@ function deleteCategory(category) {}
       </div>
     </div>
 
+  
   </div>
 </template>
 
