@@ -86,25 +86,6 @@ async function updateCategory(id) {
 
 // function addCategory() {
 
-//   alert("La catégorie existe déjà.");
-// }
-
-
-// const newCategory = { id: categories.value.length + 1, ...newCategoryData.value };
-// categories.value.push(newCategory);
-// newCategoryData.value = { name: '', image: null };
-// showCategoryForm.value = false;
-// saveData();
-
-
-// function addAnimal() {
-//   showAnimalForm.value = false;
-//   alert('Animal ajouté avec succès!');
-//   showAllAnimals.value = true;
-//   showCategoryForm.value = false;
-//   showStatistics.value = false;
-// }
-
 function openCategoryModal(category) {
   selectedCategory.value = category;
 }
@@ -132,30 +113,6 @@ const categoryStats = computed(() => {
   }));
 });
 
-
-
-// Fonction pour supprimer une catégorie
-// function deleteCategory(category) {
-//   if (confirm(`Êtes-vous sûr de vouloir supprimer la catégorie "${category.name}" et tous les animaux associés ?`)) {
-//     // Filtrer les catégories pour exclure la catégorie à supprimer
-//     categories.value = categories.value.filter(cat => cat.id !== category.id);
-
-//     // Filtrer les animaux pour exclure ceux associés à la catégorie supprimée
-//     animals.value = animals.value.filter(animal => animal.categoryId !== category.id);
-
-//     // Sauvegarder les données mises à jour
-//     saveData();
-
-//     // Optionnel : Fermer le modal de catégorie si ouvert
-//     closeCategoryModal();
-//   }
-// }
-
-// Chargement des données à l'initialisation
-// onMounted(() => {
-//   categories.value = loadCategories();
-//   animals.value = loadAnimals();
-// });
 
 
 </script>
@@ -304,26 +261,7 @@ const categoryStats = computed(() => {
       </div>
     </div>
 
-    <!-- Modal for Animal Details -->
-    <!-- <div v-if="selectedAnimal" class="modal" @click.self="closeAnimalModal">
-      <div class="modal-content">
-        <button class="close-button" @click="closeAnimalModal">&times;</button>
-        <h2>{{ selectedAnimal.name }}</h2>
-        <div class="modal-info">
-          <p><strong>Âge:</strong> {{ selectedAnimal.age }}</p>
-          <p><strong>Sexe:</strong> {{ selectedAnimal.sexe }}</p>
-          <p><strong>Activité:</strong> {{ selectedAnimal.activite }}</p>
-          <p><strong>Caractère:</strong> {{ selectedAnimal.caractere }}</p>
-          <p><strong>Description:</strong> {{ selectedAnimal.description }}</p>
-          <p><strong>Situation médicale:</strong> {{ selectedAnimal.situationMedicale }}</p>
-        </div>
-        <div class="modal-images">
-          <img :src="selectedAnimal.image" :alt="selectedAnimal.name" class="modal-image" />
-          <img v-if="selectedAnimal.image2" :src="selectedAnimal.image2" :alt="selectedAnimal.name + ' - 2'"
-            class="modal-image" />
-        </div>
-      </div>
-    </div> -->
+  
   </div>
 </template>
 
