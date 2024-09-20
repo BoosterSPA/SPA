@@ -2,10 +2,7 @@
 import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 
-import { ref, computed, onMounted } from "vue";
-import axios from "axios";
 // Données de départ ou récupérées depuis localStorage
-let showForm = false;
 let animals = ref([]);
 
 
@@ -27,6 +24,7 @@ const newAnimal = ref({
   profile_image: "",
   image_desc: "",
   medical: "",
+  id_category :"",
 });
 let updatedAnimal = ref({});
 const selectedCategory = ref(null);
@@ -64,8 +62,6 @@ async function deleteCategorie(category) {
   try {
     await axios.delete(`http://localhost:3000/animal//deleteCategory/${category.id}`);
 
-    // const response = await axios.get('http://localhost:3000/animal/getAllCategories');
-    // categories.value = response.data;
 
   const index = categories.value.indexOf(category)
   categories.value.splice(index,1)
@@ -105,30 +101,10 @@ async function updateCategory(id) {
 
 
 
-// function addCategory() {
-
-//   alert("La catégorie existe déjà.");
-// }
-
-
-// const newCategory = { id: categories.value.length + 1, ...newCategoryData.value };
-// categories.value.push(newCategory);
-// newCategoryData.value = { name: '', image: null };
-// showCategoryForm.value = false;
-// saveData();
-
-
-// function addAnimal() {
-//   showAnimalForm.value = false;
-//   alert('Animal ajouté avec succès!');
-//   showAllAnimals.value = true;
-//   showCategoryForm.value = false;
-//   showStatistics.value = false;
-// }
-
 async function addAnimal() {
   try {
     await axios.post("http://localhost:3000/animal/addAnimal", newAnimal.value);
+    
   } catch (error) {
     console.error(error);
   }
@@ -199,51 +175,21 @@ const categoryStats = computed(() => {
 
 
 
-// Fonction pour supprimer une catégorie
-// function deleteCategory(category) {
-//   if (confirm(`Êtes-vous sûr de vouloir supprimer la catégorie "${category.name}" et tous les animaux associés ?`)) {
-//     // Filtrer les catégories pour exclure la catégorie à supprimer
-//     categories.value = categories.value.filter(cat => cat.id !== category.id);
-
-//     // Filtrer les animaux pour exclure ceux associés à la catégorie supprimée
-//     animals.value = animals.value.filter(animal => animal.categoryId !== category.id);
-
-//     // Sauvegarder les données mises à jour
-//     saveData();
-
-//     // Optionnel : Fermer le modal de catégorie si ouvert
-//     closeCategoryModal();
-//   }
-// }
-
-// Chargement des données à l'initialisation
-// onMounted(() => {
-//   categories.value = loadCategories();
-//   animals.value = loadAnimals();
-// });
-
-
 function deleteCategory(category) {}
 </script>
 
 <template>
+
   <div class="admin-page">
     <!-- Buttons to toggle sections -->
     <div class="buttons">
-      <button @click="showAllAnimals = true; showCategoryForm = false; showAnimalForm = false; showStatistics = false"
-        class="btn">Tous les Animaux</button>
-      <button @click="showAllAnimals = false; showCategoryForm = true; showAnimalForm = false; showStatistics = false"
-        class="btn">Ajouter Catégorie</button>
-      <button @click="showAllAnimals = false; showCategoryForm = false; showAnimalForm = true; showStatistics = false"
-        class="btn">Ajouter Animal</button>
-      <button @click="showAllAnimals = false; showCategoryForm = false; showAnimalForm = false; showStatistics = true"
-        class="btn">Statistiques</button>
       <button
         @click="
           showAllAnimals = true;
           showCategoryForm = false;
           showAnimalForm = false;
           showStatistics = false;
+          showUpdateForm = false;
           getAnimal();
         "
         class="btn"
@@ -256,6 +202,7 @@ function deleteCategory(category) {}
           showCategoryForm = true;
           showAnimalForm = false;
           showStatistics = false;
+          showUpdateForm = false;
         "
         class="btn"
       >
@@ -267,6 +214,7 @@ function deleteCategory(category) {}
           showCategoryForm = false;
           showAnimalForm = true;
           showStatistics = false;
+          showUpdateForm = false;
         "
         class="btn"
       >
@@ -278,6 +226,7 @@ function deleteCategory(category) {}
           showCategoryForm = false;
           showAnimalForm = false;
           showStatistics = true;
+          showUpdateForm = false;
         "
         class="btn"
       >
@@ -365,26 +314,23 @@ function deleteCategory(category) {}
           <input type="text" v-model="newAnimal.image_desc" />
         </label>
         <label>
-          Description :
-          <textarea v-model="newAnimal.description"></textarea>
-        </label>
-        <label>
           Situation médicale :
           <textarea v-model="newAnimal.medical"></textarea>
         </label>
         <label>
           Catégorie :
-          <select>
+          <select v-model="newAnimal.id_category">
             <option
               v-for="category in categories"
               :key="category.id"
               :value="category.id"
+
             >
               {{ category.name }}
             </option>
           </select>
         </label>
-        <button type="submit" @click="">Ajouter Animal</button>
+        <button type="submit" @click="console.log(newAnimal.value)">Ajouter l'animal</button>
       </form>
     </div>
 
@@ -395,54 +341,40 @@ function deleteCategory(category) {}
         <label>
           Nom :
           <input type="text" v-model="updatedAnimal.name" />
-          <input type="text" />
         </label>
         <label>
           Âge :
-          <input type="text" />
           <input type="text" v-model="updatedAnimal.age" />
         </label>
         <label>
           Sexe :
-          <input type="text" />
           <input type="text" v-model="updatedAnimal.sexe" />
         </label>
         <label>
           Activité :
-          <input type="text" />
           <input type="text" v-model="updatedAnimal.activite" />
         </label>
         <label>
           Caractère :
-          <input type="text" />
           <input type="text" v-model="updatedAnimal.caractere" />
         </label>
         <label>
           Image principale :
-          <input @change="e => handleAnimalImageUpload(e, true)" type="file" accept="image/*" />
-          <img alt="Image principale de l'animal" class="animal-image-preview" />
+
           <input type="text" v-model="updatedAnimal.profile_image" />
         </label>
         <label>
           Deuxième image (optionnel) :
-          <input @change="e => handleAnimalImageUpload(e, false)" type="file" accept="image/*" />
-          <img alt="Deuxième image de l'animal" class="animal-image-preview" />
+
           <input type="text" v-model="updatedAnimal.image_desc" />
-        </label>
-        <label>
-          Description :
-          <textarea v-model="updatedAnimal.description"></textarea>
-          <textarea></textarea>
         </label>
         <label>
           Situation médicale :
           <textarea v-model="updatedAnimal.medical"></textarea>
-          <textarea></textarea>
         </label>
         <label>
           Catégorie :
-          <select>
-            <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+          <select v-model="updatedAnimal.id_category">
             <option
               v-for="category in categories"
               :key="category.id"
@@ -452,7 +384,7 @@ function deleteCategory(category) {}
             </option>
           </select>
         </label>
-        <button type="submit">Ajouter Animal</button>
+        <button type="submit">Modifier l'animal</button>
       </form>
     </div>
 
@@ -513,26 +445,12 @@ function deleteCategory(category) {}
             class="animal-image"
           />
           <h3>{{ animal.name }}</h3>
-          <!-- <button class="btn" @click="openAnimalModal(animal)">
-            Voir Détails
-          </button>
-          <button class="btn" @click="deleteAnimal(animal.id)">Delete</button>
-          <button
-            class="btn"
-            @click="
-              showUpdateForm = true;
-              updatedAnimal = animal;
-              console.log(updatedAnimal);
-            "
-          >
-            Modifier
-          </button> -->
-          <button @click="updateCategory(category)">Voir Détails</button>
+          <button class="btn">Voir Détails</button>
+          <button  class="btn" @click="deleteAnimal(animal.id)">Supprimer</button>
+          <button class="btn" @click="showUpdateForm = true; updatedAnimal = animal ">Modifier</button>
         </div>
       </div>
     </div>
-
-    <!-- Modal for Animal Details -->
 
   </div>
 </template>
@@ -575,8 +493,6 @@ function deleteCategory(category) {}
 
 .category-list,
 .animal-list {
-.category-list,
-.animal-list {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
@@ -592,8 +508,6 @@ function deleteCategory(category) {}
   cursor: pointer;
 }
 
-.category-image,
-.animal-image {
 .category-image,
 .animal-image {
   width: 100%;
