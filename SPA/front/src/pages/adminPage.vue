@@ -10,7 +10,7 @@ const showCategoryForm = ref(false);
 const showAnimalForm = ref(false);
 const showStatistics = ref(false);
 const showAllAnimals = ref(true);
-const showUpdateForm = ref(false)
+const showUpdateForm = ref(false);
 
 const newAnimal = ref({
   name: "",
@@ -22,7 +22,7 @@ const newAnimal = ref({
   image_desc: "",
   medical: "",
 });
-let updatedAnimal = ref({})
+let updatedAnimal = ref({});
 const selectedCategory = ref(null);
 const searchQuery = ref("");
 
@@ -33,16 +33,12 @@ const filteredAnimals = computed(() => {
   );
 });
 
-
 const filteredAnimalsBySearch = computed(() => {
   const search = searchQuery.value.toLowerCase();
   return filteredAnimals.value.filter((animal) =>
     animal.name.toLowerCase().includes(search)
   );
 });
-
-
-function addCategory() {}
 
 async function addAnimal() {
   try {
@@ -52,33 +48,38 @@ async function addAnimal() {
   }
 }
 async function deleteAnimal(id) {
-    try {
-      await axios.delete(`http://localhost:3000/animal/delete/${id}`)
-      const response = await axios.get('http://localhost:3000/animal/getAnimal')
-      animals.value = await response.data
-    } catch(error) {
-      console.error(error)
-    }
+  try {
+    await axios.delete(`http://localhost:3000/animal/delete/${id}`);
+    const response = await axios.get("http://localhost:3000/animal/getAnimal");
+    animals.value = await response.data;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 async function getAnimal(id) {
-  if(id === undefined) {
-    id = " "
+  if (id === undefined) {
+    id = " ";
   }
   try {
-        const response = await axios.get(`http://localhost:3000/animal/getAnimal/${id}`)
-        animals.value = await response.data
-        console.log(animals)
-    } catch (error) {
-        console.error(error)
-    }
+    const response = await axios.get(
+      `http://localhost:3000/animal/getAnimal/${id}`
+    );
+    animals.value = await response.data;
+    console.log(animals);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 async function updateAnimal(id) {
   try {
-    await axios.put(`http://localhost:3000/animal/update/${id}`, updatedAnimal.value)
-  } catch(error) {
-    console.error(error)
+    await axios.put(
+      `http://localhost:3000/animal/update/${id}`,
+      updatedAnimal.value
+    );
+  } catch (error) {
+    console.error(error);
   }
 }
 function openCategoryModal(category) {
@@ -112,11 +113,9 @@ const categoryStats = computed(() => {
 
 // Fonction pour supprimer une catégorie
 function deleteCategory(category) {}
-
 </script>
 
 <template>
-  <p>Message : {{ newAnimal.name }}</p>
   <div class="admin-page">
     <!-- Buttons to toggle sections -->
     <div class="buttons">
@@ -256,7 +255,7 @@ function deleteCategory(category) {}
       <form @submit.prevent="updateAnimal(updatedAnimal.id)">
         <label>
           Nom :
-          <input type="text" v-model="updatedAnimal.name"/>
+          <input type="text" v-model="updatedAnimal.name" />
         </label>
         <label>
           Âge :
@@ -351,11 +350,26 @@ function deleteCategory(category) {}
           :key="animal.id"
           class="animal-card"
         >
-          <img :src="animal.image" :alt="animal.name" class="animal-image" />
+          <img
+            :src="animal.profile_image"
+            :alt="animal.name"
+            class="animal-image"
+          />
           <h3>{{ animal.name }}</h3>
-          <button class="btn" @click="openAnimalModal(animal)">Voir Détails</button>
-          <button class="btn" @click ="deleteAnimal(animal.id) ">Delete</button>
-          <button class="btn" @click="showUpdateForm = true; updatedAnimal = animal; console.log(updatedAnimal)">Modifier</button>
+          <button class="btn" @click="openAnimalModal(animal)">
+            Voir Détails
+          </button>
+          <button class="btn" @click="deleteAnimal(animal.id)">Delete</button>
+          <button
+            class="btn"
+            @click="
+              showUpdateForm = true;
+              updatedAnimal = animal;
+              console.log(updatedAnimal);
+            "
+          >
+            Modifier
+          </button>
         </div>
       </div>
     </div>

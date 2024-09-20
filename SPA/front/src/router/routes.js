@@ -11,7 +11,7 @@ const router = createRouter({
 	routes: [
 
 		{ path: '/contact', component: Contact },
-		{ path: '/accueil', component: HomePage },
+		{ path: '/', component: HomePage },
 		{ path: '/adoptionPage', component: adoptionPage },
 		{ path: '/adminPage', component: adminPage },
 		{ path: '/allAnimalsPage', component: allAnimalsPage },
