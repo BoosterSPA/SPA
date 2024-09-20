@@ -1,8 +1,20 @@
 <script setup>
-import { useCarousel } from '@/composables/useCarousel';
+import { onMounted, ref } from 'vue';
 import { VueperSlides, VueperSlide } from 'vueperslides'
 import 'vueperslides/dist/vueperslides.css'
-const { carousel } = useCarousel("animal")
+import axios from 'axios';
+// import AnimalsController from '../../../back/controllers/AnimalsController'
+let animals = ref([])
+onMounted(async() => {
+    try {
+        const response = await axios.get("http://localhost:3000/animal/getAnimal")
+        animals.value = await response.data
+        console.log(animals)
+    } catch (error) {
+        console.error(error)
+    }
+})
+
 </script>
 
 <template>
@@ -14,19 +26,19 @@ const { carousel } = useCarousel("animal")
             :breakpoints="{ 800: { visibleSlides: 1 }, 1200: { visibleSlides: 2 } }" arrows-outside
             :touchable="false" :infinite="true" :visibleSlides=3 :gap="3">
 
-            <vueper-slide v-for="animal in carousel" :key="animal.name" class="slide">
+            <vueper-slide v-for="animal in animals" :key="animal.name" class="slide">
                 <template #content>
 
-                    <img :src="animal.img" alt="">
+                    <img :src="animal.profile_image" alt="">
                     <div class="pos">
                         <h3>{{ animal.name }}</h3>
                         <p v-if="animal.race">Race : {{ animal.race }}</p>
                         <p>Sexe : {{ animal.sexe }}</p>
                         <p>Age : {{ animal.age }}</p>
-                        <div v-if="animal.specie === 'chat'">
-                            <p v-if="animal.appartement">Vie en appartement : <strong>Oui</strong></p>
+                        <!-- <div v-if="animal.specie === 'chat'"> -->
+                            <!-- <p v-if="animal.activite">Vie en appartement : <strong>Oui</strong></p>
                             <p v-else>Vie en appartement : <strong>Non</strong></p>
-                        </div>
+                        </div> -->
                         <button>En savoir plus</button>
                     </div>
                 </template>
