@@ -35,7 +35,26 @@ const animals = {
     },
 
     deleteAnimal: (id, callback) => {
-        connection.query("DELETE FROM animal WHERE id = ?", id ,callback)
+        connection.query("DELETE FROM animal WHERE id = ?", id, callback)
+    },
+
+    getAllCategries: (callback) => {
+        connection.query("SELECT * FROM category", callback)
+    },
+
+    addCategory: (newCategory, callback) => {
+        const values = Object.values(newCategory);
+
+        connection.query("INSERT INTO category (name) VALUES (?)", values, callback);
+    },
+
+    updateCategory: (id, categoryUpdated, callback) => {
+        connection.query("UPDATE category SET ? WHERE id = ?", [categoryUpdated,id], callback
+        )
+    },
+
+    deleteCategory: (id, callback) => {
+        connection.query("DELETE FROM category WHERE id = ?", id, callback)
     }
 }
 

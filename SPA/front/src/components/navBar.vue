@@ -5,12 +5,11 @@ import { Slide } from 'vue-burger-menu'
 <template>
     <div>
         <nav>
-            <RouterLink to="/">Accueil</RouterLink>
+            <RouterLink to="/accueil">Accueil</RouterLink>
             <RouterLink to="/adoptionPage">Adoption</RouterLink>
             <RouterLink to="/contact">Contact</RouterLink>
-            <RouterLink to="/contact">Donation</RouterLink>
-            <RouterLink to="/contact">Partenaires</RouterLink>
-            <RouterLink to="/contact">Contact</RouterLink>
+            <RouterLink to="/donation">Donation</RouterLink>
+            <RouterLink to="/partenaires">Partenaires</RouterLink>
         </nav>
     </div>
 </template>

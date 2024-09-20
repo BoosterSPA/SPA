@@ -1,153 +1,9 @@
+
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
 
-const animals = ref([
-	{
-		id: 1,
-		name: 'Lacy',
-		age: '2 ans',
-		sexe: "Mâle",
-		activite: "Courir",
-		caractere: "sociable",
-		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
-		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
-		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod temporlorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
-		situationMedicale: 'En bonne santé'
-	},
-	{
-		id: 2,
-		name: 'Daizy',
-		age: '3 ans',
-		sexe: "Mâle",
-		activite: "Courir",
-		caractere: "Sociable",
-		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
-		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
-		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod temporlorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
-		situationMedicale: 'Vacciné et stérilisé'
-	},
-	{
-		id: 1,
-		name: 'Lacy',
-		age: '2 ans',
-		sexe: "Mâle",
-		activite: "Courir",
-		caractere: "sociable",
-		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
-		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
-		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod temporlorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
-		situationMedicale: 'En bonne santé'
-	},
-	{
-		id: 2,
-		name: 'Daizy',
-		age: '3 ans',
-		sexe: "Mâle",
-		activite: "Courir",
-		caractere: "sociable",
-		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
-		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
-		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod temporlorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
-		situationMedicale: 'Vacciné et stérilisé'
-	},
-	{
-		id: 1,
-		name: 'Lacy',
-		age: '2 ans',
-		sexe: "Mâle",
-		activite: "Courir",
-		caractere: "sociable",
-		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
-		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
-		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod temporlorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
-		situationMedicale: 'En bonne santé'
-	},
-	{
-		id: 2,
-		name: 'Daizy',
-		age: '3 ans',
-		sexe: "Femelle",
-		activite: "Dormir",
-		caractere: "Affectueuse",
-		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
-		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
-		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod temporlorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
-		situationMedicale: 'Vacciné et stérilisé'
-	},
-	{
-		id: 1,
-		name: 'Lacy',
-		age: '2 ans',
-		sexe: "Femelle",
-		activite: "Dormir",
-		caractere: "Affectueuse",
-		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
-		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
-		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod temporlorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
-		situationMedicale: 'En bonne santé'
-	},
-	{
-		id: 2,
-		name: 'Daizy',
-		age: '3 ans',
-		sexe: "Femelle",
-		Activite: "Dormir",
-		Caractere: "Affectueuse",
-		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
-		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
-		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod temporlorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
-		situationMedicale: 'Vacciné et stérilisé'
-	},
-	{
-		id: 1,
-		name: 'Lacy',
-		age: '2 ans',
-		sexe: "Femelle",
-		activite: "Dormir",
-		caractere: "Affectueuse",
-		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
-		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
-		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod temporlorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
-		situationMedicale: 'En bonne santé'
-	},
-	{
-		id: 2,
-		name: 'Daizy',
-		age: '3 ans',
-		sexe: "Femelle",
-		activite: "Dormir",
-		caractere: "Affectueuse",
-		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
-		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
-		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod temporlorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
-		situationMedicale: 'Vacciné et stérilisé'
-	},
-	{
-		id: 1,
-		name: 'Lacy',
-		age: '2 ans',
-		sexe: "Femelle",
-		activite: "Dormir",
-		caractere: "Affectueuse",
-		image: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
-		image2: 'https://resize.prod.femina.ladmedia.fr/rblr/1401,978/img/var/2021-04/races-de-chiens-pr-f-r-s-regions-francaises.jpg',
-		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor,lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
-		situationMedicale: 'En bonne santé'
-	},
-	{
-		id: 2,
-		name: 'Daizy',
-		age: '3 ans',
-		sexe: "Femelle",
-		activite: "Dormir",
-		caractere: "Affectueuse",
-		image: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
-		image2: 'https://th.bing.com/th/id/OIP.UuJfYnHRR9SNOUL4FrYLmAHaEK?rs=1&pid=ImgDetMain',
-		description: 'lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod temporlorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor, sit amet consectetur, sed do eiusmod tempor',
-		situationMedicale: 'Vacciné et stérilisé'
-	},
-]);
-
+const animals = ref([]);
 const selectedAnimal = ref(null);
 
 function openModal(animal) {
@@ -157,6 +13,17 @@ function openModal(animal) {
 function closeModal() {
 	selectedAnimal.value = null;
 }
+
+onMounted(async () => {
+	try {
+		const response = await axios.get('http://localhost:3000/animal/getAllAnimals'); 
+		animals.value = await response.data; 
+		console.log(animals)
+	} catch (error) {
+		console.error('Erreur lors de la récupération des animaux :', error);
+	}
+});
+
 </script>
 
 <template>
@@ -164,7 +31,7 @@ function closeModal() {
 		<div v-for="animal in animals" :key="animal.id" class="animalCard">
 			<img :src="animal.image" :alt="animal.name" class="animalImage" />
 			<h1>{{ animal.name }}</h1>
-			<button @click="openModal(animal)">En savoir plus sur moi </button>
+			<button @click="openModal(animal)">En savoir plus sur moi</button>
 
 			<!-- Modal -->
 			<div v-if="selectedAnimal && selectedAnimal.id === animal.id" class="modal" @click.self="closeModal">
@@ -174,23 +41,25 @@ function closeModal() {
 						<div class="info">
 							<p><strong>Âge:</strong> {{ selectedAnimal.age }}</p>
 							<p><strong>Sexe:</strong> {{ selectedAnimal.sexe }}</p>
-							<p><strong>Santé générale:</strong> {{ selectedAnimal.situationMedicale }}</p>
+							<p><strong>Santé générale:</strong> {{ selectedAnimal.medical }}</p>
 							<p><strong>Caractère:</strong> {{ selectedAnimal.caractere }}</p>
 							<p><strong>Activité:</strong> {{ selectedAnimal.activite }}</p>
 							<p><strong>Description:</strong> {{ selectedAnimal.description }}</p>
-
 						</div>
 						<button class="closeButton" @click.stop="closeModal">&times;</button>
 					</div>
 					<div class="modalImages">
 						<img :src="selectedAnimal.image" :alt="selectedAnimal.name" class="modalImage" />
-						<img :src="selectedAnimal.image2" :alt="selectedAnimal.name" class="modalImage" />
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </template>
+
+
+
+
 
 <style scoped>
 .animals {
