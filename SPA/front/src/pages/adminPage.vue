@@ -1,11 +1,6 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
-
-import { ref, computed, onMounted } from "vue";
-import axios from "axios";
-// Données de départ ou récupérées depuis localStorage
-let showForm = false;
 let animals = ref([]);
 
 
@@ -15,8 +10,12 @@ const showUpdateCategoryForm = ref(false);
 const showAnimalForm = ref(false);
 const showStatistics = ref(false);
 const showAllAnimals = ref(true);
-
 const showUpdateForm = ref(false);
+
+
+
+const showCategories = ref(true);
+
 
 const newAnimal = ref({
   name: "",
@@ -28,6 +27,7 @@ const newAnimal = ref({
   image_desc: "",
   medical: "",
 });
+
 let updatedAnimal = ref({});
 const selectedCategory = ref(null);
 
@@ -49,16 +49,30 @@ const filteredAnimalsBySearch = computed(() => {
 
 
 
-const categories = ref([]);
+let categories = ref([]);
+
 
 onMounted(async () => {
   try {
     const response = await axios.get('http://localhost:3000/animal/getAllCategories');
     categories.value = await response.data;
+    // console.log(categories.value.target);
   } catch (error) {
     console.error('Erreur lors de la récupération des animaux :', error);
   }
 });
+
+
+async function getAllCategories() {
+  try {
+    const response = await axios.get('http://localhost:3000/animal/getAllCategories');
+    categories.value = await response.data;
+    console.log(categories.value)
+  } catch (error) {
+    console.error('Erreur lors de la récupération des animaux :', error);
+  }
+};
+
 
 async function deleteCategorie(category) {
   try {
@@ -67,8 +81,8 @@ async function deleteCategorie(category) {
     // const response = await axios.get('http://localhost:3000/animal/getAllCategories');
     // categories.value = response.data;
 
-  const index = categories.value.indexOf(category)
-  categories.value.splice(index,1)
+    const index = categories.value.indexOf(category)
+    categories.value.splice(index, 1)
 
   } catch (error) {
     console.error('Erreur lors de la suppression des animaux :', error);
@@ -77,8 +91,8 @@ async function deleteCategorie(category) {
 
 
 const newCategory = ref({
-  name: '', 
-  image:null
+  name: '',
+  image: '',
 });
 
 
@@ -103,29 +117,6 @@ async function updateCategory(id) {
   }
 };
 
-
-
-// function addCategory() {
-
-//   alert("La catégorie existe déjà.");
-// }
-
-
-// const newCategory = { id: categories.value.length + 1, ...newCategoryData.value };
-// categories.value.push(newCategory);
-// newCategoryData.value = { name: '', image: null };
-// showCategoryForm.value = false;
-// saveData();
-
-
-// function addAnimal() {
-//   showAnimalForm.value = false;
-//   alert('Animal ajouté avec succès!');
-//   showAllAnimals.value = true;
-//   showCategoryForm.value = false;
-//   showStatistics.value = false;
-// }
-
 async function addAnimal() {
   try {
     await axios.post("http://localhost:3000/animal/addAnimal", newAnimal.value);
@@ -147,6 +138,7 @@ async function getAnimal(id) {
   if (id === undefined) {
     id = " ";
   }
+
   try {
     const response = await axios.get(
       `http://localhost:3000/animal/getAnimal/${id}`
@@ -197,263 +189,183 @@ const categoryStats = computed(() => {
   }));
 });
 
-
-
-// Fonction pour supprimer une catégorie
-// function deleteCategory(category) {
-//   if (confirm(`Êtes-vous sûr de vouloir supprimer la catégorie "${category.name}" et tous les animaux associés ?`)) {
-//     // Filtrer les catégories pour exclure la catégorie à supprimer
-//     categories.value = categories.value.filter(cat => cat.id !== category.id);
-
-//     // Filtrer les animaux pour exclure ceux associés à la catégorie supprimée
-//     animals.value = animals.value.filter(animal => animal.categoryId !== category.id);
-
-//     // Sauvegarder les données mises à jour
-//     saveData();
-
-//     // Optionnel : Fermer le modal de catégorie si ouvert
-//     closeCategoryModal();
-//   }
-// }
-
-// Chargement des données à l'initialisation
-// onMounted(() => {
-//   categories.value = loadCategories();
-//   animals.value = loadAnimals();
-// });
-
-
 </script>
 
 <template>
   <div class="admin-page">
     <!-- Buttons to toggle sections -->
     <div class="buttons">
-      <button @click="showAllAnimals = true; showCategoryForm = false; showAnimalForm = false; showStatistics = false"
+      <button
+        @click="showAllAnimals = true; showCategoryForm = false; showAnimalForm = false; showCategories = false; showStatistics = false; getAnimal();"
         class="btn">Tous les Animaux</button>
-      <button @click="showAllAnimals = false; showCategoryForm = true; showAnimalForm = false; showStatistics = false"
+      <button
+        @click="showAllAnimals = false; showCategoryForm = false; showAnimalForm = false; showCategories = true; showStatistics = false; getAllCategories();"
+        class="btn">Voir toutes les Catégories</button>
+      <button
+        @click="showAllAnimals = false; showCategoryForm = true; showAnimalForm = false; showCategories = false; showStatistics = false"
         class="btn">Ajouter Catégorie</button>
-      <button @click="showAllAnimals = false; showCategoryForm = false; showAnimalForm = true; showStatistics = false"
+      <button
+        @click="showAllAnimals = false; showCategoryForm = false; showAnimalForm = true; showCategories = false; showStatistics = false"
         class="btn">Ajouter Animal</button>
-      <button @click="showAllAnimals = false; showCategoryForm = false; showAnimalForm = false; showStatistics = true"
+      <button
+        @click="showAllAnimals = false; showCategoryForm = false; showAnimalForm = false; showCategories = false; showStatistics = true"
         class="btn">Statistiques</button>
-      <button
-        @click="
-          showAllAnimals = true;
-          showCategoryForm = false;
-          showAnimalForm = false;
-          showStatistics = false;
-          getAnimal();
-        "
-        class="btn"
-      >
-        Tous les Animaux
-      </button>
-      <button
-        @click="
-          showAllAnimals = false;
-          showCategoryForm = true;
-          showAnimalForm = false;
-          showStatistics = false;
-        "
-        class="btn"
-      >
-        Ajouter Catégorie
-      </button>
-      <button
-        @click="
-          showAllAnimals = false;
-          showCategoryForm = false;
-          showAnimalForm = true;
-          showStatistics = false;
-        "
-        class="btn"
-      >
-        Ajouter Animal
-      </button>
-      <button
-        @click="
-          showAllAnimals = false;
-          showCategoryForm = false;
-          showAnimalForm = false;
-          showStatistics = true;
-        "
-        class="btn"
-      >
-        Statistiques
-      </button>
+
     </div>
 
-    <!-- Category Form -->
-    <div v-if="showCategoryForm" class="section">
-      <h2>Ajouter une Catégorie</h2>
-      <form @submit.prevent="addCategory">
-        <label>
-          Nom :
-          <input v-model="newCategory.name" type="text" />
-        </label>
-        <label>
-          Image :
-          <input @change="handleCategoryImageUpload" type="file" accept="image/*" />
+    <!-- Formulaire d'ajout de catégorie dans une modale -->
+    <div v-if="showCategoryForm" class="modal">
+      <div class="modal-content">
+        <button class="close-button" @click="showCategoryForm = false">&times;</button>
+        <h2>Ajouter une Catégorie</h2>
+        <form @submit.prevent="addCategory">
+          <label>
+            Nom :
+            <input v-model="newCategory.name" type="text" />
+          </label>
+          <label>
+            Image (URL) :
+            <input v-model="newCategory.image" type="text" placeholder="Entrez l'URL de l'image" />
+          </label>
           <img v-if="newCategory.image" :src="newCategory.image" alt="Image de la catégorie"
             class="category-image-preview" />
-        </label>
-        <button type="submit" class="btn">Ajouter Catégorie</button>
-      </form>
+          <button type="submit" class="btn">Ajouter Catégorie</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Formulaire de modification de catégorie dans une modale -->
+    <div v-if="showUpdateCategoryForm" class="modal">
+      <div class="modal-content">
+        <button class="close-button" @click="showUpdateCategoryForm = false">&times;</button>
+        <h2>Modifier la Catégorie</h2>
+        <form @submit.prevent="updateCategory(putCategory.id)">
+          <label>
+            Nom :
+            <input v-model="putCategory.name" type="text" />
+          </label>
+          <label>
+            Image (URL) :
+            <input v-model="putCategory.image" type="text" placeholder="Entrez l'URL de l'image" />
+          </label>
+          <img v-if="putCategory.image" :src="putCategory.image" alt="Image de la catégorie"
+            class="category-image-preview" />
+          <button type="submit" class="btn">Mettre à jour la Catégorie</button>
+        </form>
+      </div>
     </div>
 
 
-
-    <div v-if="showUpdateCategoryForm" class="section">
-      <h2>Modifier la Catégorie</h2>
-      <form @submit.prevent="updateCategory(putCategory.id)">
-        <label>
-          Nom :
-          <input v-model="putCategory.name" type="text" />
-        </label>
-        <label>
-          Image :
-          <input
-            @change="handleCategoryImageUpload"
-            type="file"
-            accept="image/*"
-          />
-          <img
-            v-if="putCategory.image"
-            :src="put.image"
-            alt="Image de la catégorie"
-           
-            class="category-image-preview"
-          />
-        </label>
-        <button type="submit" class="btn">Ajouter Catégorie</button>
-      </form>
+    <!-- Formulaire d'ajout d'animal dans une modale -->
+    <div v-if="showAnimalForm" class="modal">
+      <div class="modal-content">
+        <button class="close-button" @click="showAnimalForm = false">&times;</button>
+        <h2>Ajouter un Animal</h2>
+        <form @submit.prevent="addAnimal">
+          <label>
+            Nom :
+            <input v-model="newAnimal.name" type="text" />
+          </label>
+          <label>
+            Âge :
+            <input v-model="newAnimal.age" type="text" />
+          </label>
+          <label>
+            Sexe :
+            <input v-model="newAnimal.sexe" type="text" />
+          </label>
+          <label>
+            Activité :
+            <input v-model="newAnimal.activite" type="text" />
+          </label>
+          <label>
+            Caractère :
+            <input v-model="newAnimal.caractere" type="text" />
+          </label>
+          <label>
+            Image principale :
+            <input v-model="newAnimal.profile_image" type="text" />
+          </label>
+          <label>
+            Deuxième image (optionnel) :
+            <input v-model="newAnimal.image_desc" type="text" />
+          </label>
+          <label>
+            Description :
+            <textarea v-model="newAnimal.description"></textarea>
+          </label>
+          <label>
+            Situation médicale :
+            <textarea v-model="newAnimal.medical"></textarea>
+          </label>
+          <label>
+            Catégorie :
+            <select>
+              <option v-for="category in categories" :key="category.id" :value="category.id">
+                {{ category.name }}
+              </option>
+            </select>
+          </label>
+          <button type="submit" class="btn">Ajouter Animal</button>
+        </form>
+      </div>
     </div>
 
-    <!-- Animal Form -->
-    <div v-if="showAnimalForm" class="section">
-      <h2>Ajouter un Animal</h2>
-
-      <form @submit.prevent="addAnimal">
-        <label>
-          Nom :
-          <input type="text" v-model="newAnimal.name" />
-        </label>
-        <label>
-          Âge :
-          <input type="text" v-model="newAnimal.age" />
-        </label>
-        <label>
-          Sexe :
-          <input type="text" v-model="newAnimal.sexe" />
-        </label>
-        <label>
-          Activité :
-          <input type="text" v-model="newAnimal.activite" />
-        </label>
-        <label>
-          Caractère :
-          <input type="text" v-model="newAnimal.caractere" />
-        </label>
-        <label>
-          Image principale :
-          <input type="text" v-model="newAnimal.profile_image" />
-        </label>
-        <label>
-          Deuxième image (optionnel) :
-          <input type="text" v-model="newAnimal.image_desc" />
-        </label>
-        <label>
-          Description :
-          <textarea v-model="newAnimal.description"></textarea>
-        </label>
-        <label>
-          Situation médicale :
-          <textarea v-model="newAnimal.medical"></textarea>
-        </label>
-        <label>
-          Catégorie :
-          <select>
-            <option
-              v-for="category in categories"
-              :key="category.id"
-              :value="category.id"
-            >
-              {{ category.name }}
-            </option>
-          </select>
-        </label>
-        <button type="submit" @click="">Ajouter Animal</button>
-      </form>
+    <!-- Formulaire de modification d'animal dans une modale -->
+    <div v-if="showUpdateForm" class="modal">
+      <div class="modal-content">
+        <button class="close-button" @click="showUpdateForm = false">&times;</button>
+        <h2>Modifier un Animal</h2>
+        <form @submit.prevent="updateAnimal(updatedAnimal.id)">
+          <label>
+            Nom :
+            <input v-model="updatedAnimal.name" type="text" />
+          </label>
+          <label>
+            Âge :
+            <input v-model="updatedAnimal.age" type="text" />
+          </label>
+          <label>
+            Sexe :
+            <input v-model="updatedAnimal.sexe" type="text" />
+          </label>
+          <label>
+            Activité :
+            <input v-model="updatedAnimal.activite" type="text" />
+          </label>
+          <label>
+            Caractère :
+            <input v-model="updatedAnimal.caractere" type="text" />
+          </label>
+          <label>
+            Image principale :
+            <input type="text" v-model="updatedAnimal.profile_image" />
+          </label>
+          <label>
+            Deuxième image (optionnel) :
+            <input type="text" v-model="updatedAnimal.image_desc" />
+          </label>
+          <label>
+            Description :
+            <textarea v-model="updatedAnimal.description"></textarea>
+          </label>
+          <label>
+            Situation médicale :
+            <textarea v-model="updatedAnimal.medical"></textarea>
+          </label>
+          <label>
+            Catégorie :
+            <select>
+              <option v-for="category in categories" :key="category.id" :value="category.id">
+                {{ category.name }}
+              </option>
+            </select>
+          </label>
+          <button type="submit" class="btn">Mettre à jour Animal</button>
+        </form>
+      </div>
     </div>
 
-    <div v-if="showUpdateForm" class="section">
-      <h2>Modifier un Animal</h2>
-
-      <form @submit.prevent="updateAnimal(updatedAnimal.id)">
-        <label>
-          Nom :
-          <input type="text" v-model="updatedAnimal.name" />
-          <input type="text" />
-        </label>
-        <label>
-          Âge :
-          <input type="text" />
-          <input type="text" v-model="updatedAnimal.age" />
-        </label>
-        <label>
-          Sexe :
-          <input type="text" />
-          <input type="text" v-model="updatedAnimal.sexe" />
-        </label>
-        <label>
-          Activité :
-          <input type="text" />
-          <input type="text" v-model="updatedAnimal.activite" />
-        </label>
-        <label>
-          Caractère :
-          <input type="text" />
-          <input type="text" v-model="updatedAnimal.caractere" />
-        </label>
-        <label>
-          Image principale :
-          <input @change="e => handleAnimalImageUpload(e, true)" type="file" accept="image/*" />
-          <img alt="Image principale de l'animal" class="animal-image-preview" />
-          <input type="text" v-model="updatedAnimal.profile_image" />
-        </label>
-        <label>
-          Deuxième image (optionnel) :
-          <input @change="e => handleAnimalImageUpload(e, false)" type="file" accept="image/*" />
-          <img alt="Deuxième image de l'animal" class="animal-image-preview" />
-          <input type="text" v-model="updatedAnimal.image_desc" />
-        </label>
-        <label>
-          Description :
-          <textarea v-model="updatedAnimal.description"></textarea>
-          <textarea></textarea>
-        </label>
-        <label>
-          Situation médicale :
-          <textarea v-model="updatedAnimal.medical"></textarea>
-          <textarea></textarea>
-        </label>
-        <label>
-          Catégorie :
-          <select>
-            <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
-            <option
-              v-for="category in categories"
-              :key="category.id"
-              :value="category.id"
-            >
-              {{ category.name }}
-            </option>
-          </select>
-        </label>
-        <button type="submit">Ajouter Animal</button>
-      </form>
-    </div>
 
     <!-- Animal Statistics Section -->
     <div v-if="showStatistics" class="section">
@@ -470,68 +382,35 @@ const categoryStats = computed(() => {
       <h2>Liste des Animaux</h2>
       <label>
         Rechercher :
-        <input
-          v-model="searchQuery"
-          type="text"
-          placeholder="Rechercher par nom"
-        />
+        <input v-model="searchQuery" type="text" placeholder="Rechercher par nom" />
       </label>
 
 
 
-      <div class="category-list">
-        <div
-          v-for="category in categories"
-          :key="category.id"
-          class="category-card"
-        >
-          <img
-            :src="category.image"
-            :alt="category.name"
-            class="category-image"
-          />
+      <div v-if="showCategories" class="category-list">
+        <div v-for="category in categories" :key="category.id" class="category-card">
+          <img :src="category.image" :alt="category.name" class="category-image" />
           <h3>{{ category.name }}</h3>
-          <button @click="openCategoryModal(category)">Voir Détails</button>
-          <button type="submit" @click="deleteCategorie(category)" class="btn btn-delete">
-            Supprimer
-          </button>
-          <button type="submit" @click="showUpdateCategoryForm= true ; putCategory = category" class="btn btn-edit">Modifier</button>
+          <p @click="openCategoryModal(category)" class="view-details">Voir Détails</p>
+          <div class="button-container">
+            <button type="submit" @click="deleteCategorie(category)" class="btn btn-delete">Supprimer</button>
+            <button type="submit" @click="showUpdateCategoryForm = true; putCategory = category"
+              class="btn btn-edit">Modifier</button>
+          </div>
         </div>
       </div>
 
 
+
       <div class="animal-list">
-        <div
-          v-for="animal in filteredAnimalsBySearch"
-          :key="animal.id"
-          class="animal-card"
-        >
-          <img
-            :src="animal.profile_image"
-            :alt="animal.name"
-            class="animal-image"
-          />
+        <div v-for="animal in filteredAnimalsBySearch" :key="animal.id" class="animal-card">
+          <img :src="animal.profile_image" :alt="animal.name" class="animal-image" />
           <h3>{{ animal.name }}</h3>
-          <!-- <button class="btn" @click="openAnimalModal(animal)">
-            Voir Détails
-          </button>
-          <button class="btn" @click="deleteAnimal(animal.id)">Delete</button>
-          <button
-            class="btn"
-            @click="
-              showUpdateForm = true;
-              updatedAnimal = animal;
-              console.log(updatedAnimal);
-            "
-          >
-            Modifier
-          </button> -->
-          <button @click="updateCategory(category)">Voir Détails</button>
         </div>
       </div>
     </div>
 
-  
+
   </div>
 </template>
 
@@ -571,45 +450,86 @@ const categoryStats = computed(() => {
   margin-bottom: 40px;
 }
 
-.category-list,
-.animal-list {
-.category-list,
-.animal-list {
+.category-list {
   display: flex;
-  gap: 20px;
+  gap: 30px;
   flex-wrap: wrap;
 }
 
-.category-card,
-.animal-card {
+.category-card {
   border: 1px solid #ddd;
-  padding: 16px;
-  border-radius: 8px;
-  width: 200px;
+  border-radius: 10px;
+  width: 250px;
+  /* Ajuster la taille */
   text-align: center;
   cursor: pointer;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
 }
 
-.category-image,
-.animal-image {
-.category-image,
-.animal-image {
+.category-card:hover {
+  transform: scale(1.05);
+}
+
+.category-image {
   width: 100%;
-  height: 150px;
+  height: 180px;
   object-fit: cover;
-  border-radius: 8px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
-.category-image-preview,
-.animal-image-preview {
-  width: 100%;
-  height: auto;
+.view-details {
+  text-align: center;
+  text-decoration: underline;
+  color: black;
+  cursor: pointer;
+  margin: 10px 0; 
+}
+
+.view-details:hover {
+  color: #ff7d29;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
   margin-top: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  object-fit: cover;
+  padding: 10px 0;
 }
 
+.btn {
+  padding: 8px 12px;
+  background-color: #ff7d29;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #ffbf78;
+}
+
+.btn-delete {
+  background-color: #ff3d3d;
+}
+
+.btn-delete:hover {
+  background-color: #ff8c8c;
+}
+
+.btn-edit {
+  background-color: #29a745;
+}
+
+.btn-edit:hover {
+  background-color: #78d88f;
+}
+
+/* Affichage en modale pour les formulaires */
 .modal {
   position: fixed;
   top: 0;
@@ -627,25 +547,43 @@ const categoryStats = computed(() => {
   background: #fff;
   padding: 40px;
   border-radius: 8px;
-  max-width: 800px;
+  max-width: 600px;
   width: 90%;
   position: relative;
 }
 
-.modal-info {
-  margin-bottom: 20px;
+.modal-content h2 {
+  margin-top: 0;
+  color: #333;
 }
 
-.modal-images {
-  display: flex;
-  gap: 10px;
+.modal-content label {
+  display: block;
+  margin-bottom: 15px;
 }
 
-.modal-image {
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.modal-content button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ff7d29;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.modal-content button:hover {
+  background-color: #ffbf78;
 }
 
 .close-button {
@@ -654,12 +592,84 @@ const categoryStats = computed(() => {
   right: 10px;
   background: transparent;
   border: none;
-  font-size: 36px;
-  color: #ff7d29;
+  font-size: 24px;
+  color: #333;
   cursor: pointer;
 }
 
 .close-button:hover {
-  color: #ffbf78;
+  color: #ff7d29;
 }
+
+
+
+/* Alignement des boutons Supprimer et Modifier en ligne */
+.category-card .btn-delete,
+.category-card .btn-edit {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.animal-card .btn-delete,
+.animal-card .btn-edit {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+
+.animal-list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.animal-card {
+  border: 1px solid #ddd;
+  border-radius: 12px; /* Coins arrondis */
+  width: 250px; /* Largeur plus grande */
+  text-align: center;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  transition: transform 0.3s; /* Transition douce */
+}
+
+.animal-card:hover {
+  transform: translateY(-5px); /* Léger effet de soulèvement au survol */
+}
+
+.animal-image {
+  width: 100%;
+  height: 180px; /* Hauteur ajustée */
+  object-fit: cover; /* Rendre l'image responsive */
+  border-radius: 12px; /* Coins arrondis pour l'image */
+}
+
+.animal-buttons {
+  margin-top: 10px; /* Espace entre le nom et les boutons */
+  display: flex;
+  justify-content: space-between; /* Espacement entre les boutons */
+}
+
+.btn {
+  background-color: #ff7d29; /* Couleur du bouton */
+  color: white;
+  padding: 8px 12px; /* Taille du bouton */
+  border: none;
+  border-radius: 5px; /* Coins arrondis */
+  cursor: pointer;
+  transition: background-color 0.3s; /* Transition de couleur */
+}
+
+.btn:hover {
+  background-color: #ffbf78; /* Couleur au survol */
+}
+
+.btn-delete {
+  background-color: #ff3d3d; /* Couleur pour le bouton supprimer */
+}
+
+.btn-delete:hover {
+  background-color: #ff8c8c; /* Couleur au survol pour supprimer */
+}
+
 </style>

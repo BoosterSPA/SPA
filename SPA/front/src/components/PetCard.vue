@@ -1,4 +1,3 @@
-
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
@@ -16,8 +15,8 @@ function closeModal() {
 
 onMounted(async () => {
 	try {
-		const response = await axios.get('http://localhost:3000/animal/getAllAnimals'); 
-		animals.value = await response.data; 
+		const response = await axios.get('http://localhost:3000/animal/getAnimal');
+		animals.value = await response.data;
 		console.log(animals)
 	} catch (error) {
 		console.error('Erreur lors de la récupération des animaux :', error);
@@ -29,7 +28,7 @@ onMounted(async () => {
 <template>
 	<div class="animals">
 		<div v-for="animal in animals" :key="animal.id" class="animalCard">
-			<img :src="animal.image" :alt="animal.name" class="animalImage" />
+			<img :src="animal.profile_image" :alt="animal.name" class="animalImage" />
 			<h1>{{ animal.name }}</h1>
 			<button @click="openModal(animal)">En savoir plus sur moi</button>
 
@@ -116,42 +115,69 @@ button:active {
 	transform: scale(0.98);
 }
 
-.modal {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.5);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	z-index: 1000;
-}
-
 .modalContent {
 	background: #fff;
 	padding: 40px;
-	border-radius: 8px;
+	border-radius: 12px;
+	/* Coins arrondis */
 	text-align: left;
 	position: relative;
-	max-width: 1200px;
+	max-width: 800px;
+	/* Ajustez la largeur max de la modal */
 	width: 90%;
-	height: 80%;
-	display: flex;
-	gap: 40px;
-}
-
-.info {
+	height: auto;
+	/* Ajustement de la hauteur pour s'adapter au contenu */
 	display: flex;
 	flex-direction: column;
-	margin-top: 50px;
+	/* Empilement vertical */
+}
+
+.modalInfo {
+	flex: 1;
+	/* Prend l'espace disponible */
+	font-size: 18px;
+	display: flex;
+	flex-direction: column;
+	/* Empile les informations */
+}
+
+.modalInfo h2 {
+	font-size: 32px;
+	/* Titre plus grand */
+	margin-bottom: 20px;
+	color: #FF7D29;
+}
+
+.modalInfo p {
+	font-size: 20px;
+	/* Ajustement de la taille de texte */
+	margin-bottom: 15px;
+	line-height: 1.5;
+	/* Espace entre les lignes */
+}
+
+.modalImages {
+	margin-top: 20px;
+	/* Ajout d'un espace au-dessus des images */
+	display: flex;
+	flex-direction: column;
+	/* Empilement vertical */
+	gap: 10px;
+}
+
+.modalImage {
+	width: 100%;
+	height: auto;
+	/* Ajustement pour garder le rapport d'aspect */
+	border-radius: 8px;
+	max-height: 300px;
+	/* Hauteur max pour l'image */
 }
 
 .closeButton {
 	position: absolute;
-	top: 10px;
-	right: 10px;
+	top: 15px;
+	right: 15px;
 	background: transparent;
 	border: none;
 	font-size: 36px;
@@ -160,40 +186,10 @@ button:active {
 }
 
 .closeButton:hover {
-	background-color: #FFBF78;
+	color: #FFBF78;
+	/* Couleur au survol */
 }
 
-
-.modalInfo {
-	flex: 1;
-	font-size: 18px;
-}
-
-.modalInfo h2 {
-	font-size: 36px;
-	margin-bottom: 20px;
-	color: #FF7D29;
-}
-
-.modalInfo p {
-	font-size: 24px;
-	margin-bottom: 10px;
-	line-height: 2;
-}
-
-.modalImages {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-}
-
-.modalImage {
-	width: 100%;
-	height: 50%;
-	object-fit: cover;
-	border-radius: 8px;
-}
 
 @media (max-width: 768px) {
 	.animalCard {
