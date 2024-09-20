@@ -6,9 +6,8 @@ import { ref, computed, onMounted } from "vue";
 import axios from "axios";
 // Données de départ ou récupérées depuis localStorage
 let showForm = false;
-const categories = ref([]);
 let animals = ref([]);
-const animals = ref([]);
+
 
 const showCategoryForm = ref(false);
 const showUpdateCategoryForm = ref(false);
@@ -444,7 +443,6 @@ function deleteCategory(category) {}
           Catégorie :
           <select>
             <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
-          <select>
             <option
               v-for="category in categories"
               :key="category.id"
@@ -535,37 +533,7 @@ function deleteCategory(category) {}
     </div>
 
     <!-- Modal for Animal Details -->
-    <!-- <div v-if="selectedAnimal" class="modal" @click.self="closeAnimalModal">
-      <div class="modal-content">
-        <button class="close-button" @click="closeAnimalModal">&times;</button>
-        <h2>{{ selectedAnimal.name }}</h2>
-        <div class="modal-info">
-          <p><strong>Âge:</strong> {{ selectedAnimal.age }}</p>
-          <p><strong>Sexe:</strong> {{ selectedAnimal.sexe }}</p>
-          <p><strong>Activité:</strong> {{ selectedAnimal.activite }}</p>
-          <p><strong>Caractère:</strong> {{ selectedAnimal.caractere }}</p>
-          <p><strong>Description:</strong> {{ selectedAnimal.description }}</p>
-          <p>
-            <strong>Situation médicale:</strong>
-            {{ selectedAnimal.situationMedicale }}
-          </p>
-        </div>
-        <div class="modal-images">
-          <img
-            :src="selectedAnimal.image"
-            :alt="selectedAnimal.name"
-            class="modal-image"
-          />
-          <img
-            v-if="selectedAnimal.image2"
-            :src="selectedAnimal.image2"
-            :alt="selectedAnimal.name + ' - 2'"
-           
-            class="modal-image"
-          />
-        </div>
-      </div>
-    </div> -->
+
   </div>
 </template>
 
